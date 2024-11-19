@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>869770397358-jmqfpvvcvrj21kvm6csletcio9g1qcg5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.869770397358-jmqfpvvcvrj21kvm6csletcio9g1qcg5</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>869770397358-c6tv6t1mcsbp7e9651gvp2djrm2uui3n.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDD60Ds3jm1cI7ja2OMWgYtXK4sD7c6QSY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>869770397358</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.srisoftwarez.daytodayLedgerbook</string>
+	<key>PROJECT_ID</key>
+	<string>sri-softwarez-daytoday</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sri-softwarez-daytoday.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:869770397358:ios:a4d4f28665827f4e208f3f</string>
+</dict>
+</plist>
