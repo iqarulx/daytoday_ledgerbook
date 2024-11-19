@@ -24,10 +24,29 @@
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
+		<key>LSSupportsOpeningDocumentsInPlace</key>
+		<true/>
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+		</dict>
+		<key>NSCameraUsageDescription</key>
+		<string>This app requires access to the camera.</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>This app does not require access to the microphone.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>This app requires access to the photo library.</string>
+		<key>UIApplicationSupportsIndirectInputEvents</key>
+		<true/>
+		<key>UIFileSharingEnabled</key>
+		<true/>
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
+		<key>UIStatusBarHidden</key>
+		<false/>
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>
@@ -41,17 +60,7 @@
 			<string>UIInterfaceOrientationLandscapeLeft</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
-		<key>CADisableMinimumFrameDurationOnPhone</key>
-		<true/>
-		<key>UIApplicationSupportsIndirectInputEvents</key>
-		<true/>
-		<key>UIStatusBarHidden</key>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
-		<key>NSCameraUsageDescription</key>
-		<string>This app requires access to the camera to take photos or videos.</string>
-		<key>NSMicrophoneUsageDescription</key>
-		<string>This app requires access to the microphone for audio recording.</string>
-		<key>NSPhotoLibraryAddUsageDescription</key>
-		<string>This app requires permission to save photos to the Photo Library.</string>
 	</dict>
 </plist>
