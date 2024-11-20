@@ -290,14 +290,16 @@ class _HomePageState extends State<HomePage>
           ),
           elevation: 0,
           actions: [
-            IconButton(
-              onPressed: () {
-                uploadFile();
-              },
-              icon: const Icon(
-                Icons.backup,
-              ),
-            ),
+            Platform.isAndroid
+                ? IconButton(
+                    onPressed: () {
+                      uploadFile();
+                    },
+                    icon: const Icon(
+                      Icons.backup,
+                    ),
+                  )
+                : Container(),
             // IconButton(
             //   onPressed: () {},
             //   icon: const Icon(

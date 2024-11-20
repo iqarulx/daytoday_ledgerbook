@@ -143,48 +143,71 @@ class _SigninGoogleState extends State<SigninGoogle> {
               const SizedBox(
                 height: 15,
               ),
-              Center(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
+              if (Platform.isAndroid)
+                Center(
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                        ),
+                        onPressed: () {
+                          signInWithGoogle();
+                        },
+                        child: const Text(
+                          "Sign in",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text("OR"),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                        ),
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const SigininWithMail();
+                          }));
+                        },
+                        child: const Text(
+                          "Signin With Mail",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  onPressed: () {
-                    signInWithGoogle();
-                  },
-                  child: const Text(
-                    "Sign in",
-                    style: TextStyle(
-                      color: Colors.white,
+                )
+              else
+                Center(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const SigininWithMail();
+                      }));
+                    },
+                    child: const Text(
+                      "Signin With Mail",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              const Center(child: Text("OR")),
-              const SizedBox(
-                height: 5,
-              ),
-              Center(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const SigininWithMail();
-                    }));
-                  },
-                  child: const Text(
-                    "Signin With Mail",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
               const SizedBox(
                 height: 20,
               ),

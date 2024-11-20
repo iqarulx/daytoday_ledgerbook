@@ -642,74 +642,78 @@ class _SettingsState extends State<Settings> {
             subtitle: const Text("Manage your profils and accounts"),
           ),
           const Divider(),
-          ListTile(
-            leading: const SizedBox(
-              height: 40,
-              width: 40,
-            ),
-            title: Text(
-              localizedValues[language]!["settings"]!["google-drive-settings"]!,
-            ),
-          ),
-          ListTile(
-            onTap: () {
-              uploadFile();
-            },
-            leading: SizedBox(
-              height: 40,
-              width: 40,
-              child: Center(
-                child: Icon(
-                  Icons.account_circle,
-                  color: Theme.of(context).primaryColor,
-                ),
+          if (io.Platform.isAndroid)
+            ListTile(
+              leading: const SizedBox(
+                height: 40,
+                width: 40,
+              ),
+              title: Text(
+                localizedValues[language]!["settings"]![
+                    "google-drive-settings"]!,
               ),
             ),
-            title: Text(
-                localizedValues[language]!["settings"]!["google-account"]!),
-            subtitle: account == null
-                ? const Text("Choose an account")
-                : Text(account!.email.toString()),
-          ),
-          const Divider(),
-          ListTile(
-            leading: SizedBox(
-              height: 40,
-              width: 40,
-              child: Center(
-                child: Icon(
-                  Icons.cloud_upload_rounded,
-                  color: Theme.of(context).primaryColor,
+          if (io.Platform.isAndroid)
+            ListTile(
+              onTap: () {
+                uploadFile();
+              },
+              leading: SizedBox(
+                height: 40,
+                width: 40,
+                child: Center(
+                  child: Icon(
+                    Icons.account_circle,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
+              title: Text(
+                  localizedValues[language]!["settings"]!["google-account"]!),
+              subtitle: account == null
+                  ? const Text("Choose an account")
+                  : Text(account!.email.toString()),
             ),
-            title:
-                Text(localizedValues[language]!["settings"]!["Last-Backup"]!),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Google Drive: ${fileDate.isNotEmpty ? fileDate : "--:--"}  Size: ${fileSize.isNotEmpty ? fileSize : "-- --"}\n${localizedValues[language]!["settings"]!["Last-Backup-subtitle"]!}",
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {
-                    uploadFile();
-                  },
-                  child: Text(
-                    localizedValues[language]!["settings"]!["backup"]!,
-                    style: const TextStyle(color: Colors.white),
+          if (io.Platform.isAndroid) const Divider(),
+          if (io.Platform.isAndroid)
+            ListTile(
+              leading: SizedBox(
+                height: 40,
+                width: 40,
+                child: Center(
+                  child: Icon(
+                    Icons.cloud_upload_rounded,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
-              ],
+              ),
+              title:
+                  Text(localizedValues[language]!["settings"]!["Last-Backup"]!),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Google Drive: ${fileDate.isNotEmpty ? fileDate : "--:--"}  Size: ${fileSize.isNotEmpty ? fileSize : "-- --"}\n${localizedValues[language]!["settings"]!["Last-Backup-subtitle"]!}",
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
+                    onPressed: () {
+                      uploadFile();
+                    },
+                    child: Text(
+                      localizedValues[language]!["settings"]!["backup"]!,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
           ListTile(
             onTap: () {
               Navigator.push(
@@ -850,23 +854,24 @@ class _SettingsState extends State<Settings> {
               "1.0.2\n${localizedValues[language]!["settings"]!["app-version-subtitle"]!}",
             ),
           ),
-          ListTile(
-            onTap: () {},
-            leading: SizedBox(
-              height: 40,
-              width: 40,
-              child: Center(
-                child: Icon(
-                  Icons.stars_rounded,
-                  color: Theme.of(context).primaryColor,
+          if (io.Platform.isAndroid)
+            ListTile(
+              onTap: () {},
+              leading: SizedBox(
+                height: 40,
+                width: 40,
+                child: Center(
+                  child: Icon(
+                    Icons.stars_rounded,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
+              title: Text(localizedValues[language]!["settings"]!["premium"]!),
+              subtitle: const Text(
+                "Explore Premium Benifits",
+              ),
             ),
-            title: Text(localizedValues[language]!["settings"]!["premium"]!),
-            subtitle: const Text(
-              "Explore Premium Benifits",
-            ),
-          ),
         ],
       ),
     );
