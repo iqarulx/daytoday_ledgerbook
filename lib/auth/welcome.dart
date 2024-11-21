@@ -4,9 +4,12 @@
   found in the LICENSE file.
 */
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import '../welcome/initiateprofile.dart';
 import '../welcome/signin_google.dart';
 import 'choosegoogleaccount.dart';
 
@@ -219,13 +222,25 @@ class _WelcomeState extends State<Welcome> {
                                         //         .getInstance();
                                         // preferences.setBool('login', true);
 
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SigninGoogle(),
-                                          ),
-                                        );
+                                        if (Platform.isAndroid) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const SigninGoogle(),
+                                            ),
+                                          );
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Initiateprofile(
+                                                profileName: "Guest",
+                                              ),
+                                            ),
+                                          );
+                                        }
                                       },
                                       child: Text(
                                         "I'M A NEW USER",

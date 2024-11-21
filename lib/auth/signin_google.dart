@@ -13,8 +13,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io' as io;
 
-import 'initiateprofile.dart';
-import 'siginin_with_mail.dart';
+import '../welcome/initiateprofile.dart';
+import '../welcome/siginin_with_mail.dart';
 
 class SigninGoogle extends StatefulWidget {
   const SigninGoogle({super.key});
@@ -30,23 +30,18 @@ class _SigninGoogleState extends State<SigninGoogle> {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser != null) {
-        final GoogleSignInAuthentication googleAuth =
-            await googleUser.authentication;
+        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
         final OAuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
 
-        final UserCredential userCredential =
-            await FirebaseAuth.instance.signInWithCredential(credential);
+        final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
         final User? user = userCredential.user;
 
         if (user != null) {
-          await FirebaseFirestore.instance
-              .collection('users')
-              .doc(user.uid)
-              .set({
+          await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
             'name': user.displayName,
             'photoUrl': user.photoURL,
             'createdDateTime': FieldValue.serverTimestamp(),
@@ -172,8 +167,7 @@ class _SigninGoogleState extends State<SigninGoogle> {
                         backgroundColor: Theme.of(context).primaryColor,
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
                           return const SigininWithMail();
                         }));
                       },

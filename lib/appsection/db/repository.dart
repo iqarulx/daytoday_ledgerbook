@@ -22,6 +22,10 @@ class Repository {
     }
   }
 
+  Future<void> deleteDatabase() async {
+    databaseFactory.deleteDatabase(await getDatabasesPath());
+  }
+
   insertData(table, values) async {
     var connection = await database;
     return await connection?.insert(table, values);

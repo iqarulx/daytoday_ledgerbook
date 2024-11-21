@@ -192,8 +192,8 @@ class _SettingsState extends State<Settings> {
     await localFile.create();
     await localFile.writeAsString(filename);
 
-    final createdFile = await api!.files.create(gFile,
-        uploadMedia: drive.Media(localFile.openRead(), localFile.lengthSync()));
+    final createdFile =
+        await api!.files.create(gFile, uploadMedia: drive.Media(localFile.openRead(), localFile.lengthSync()));
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('File saved => id : ${createdFile.id}'),
@@ -267,19 +267,14 @@ class _SettingsState extends State<Settings> {
   uploadGoogleDriveTime() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      fileSize = preferences.getString('size') == null
-          ? ""
-          : preferences.getString('size')!;
-      fileDate = preferences.getString('lastbackup') == null
-          ? ""
-          : preferences.getString('lastbackup')!;
+      fileSize = preferences.getString('size') == null ? "" : preferences.getString('size')!;
+      fileDate = preferences.getString('lastbackup') == null ? "" : preferences.getString('lastbackup')!;
     });
   }
 
   Future inifun() async {
     try {
-      _googleSignIn.onCurrentUserChanged
-          .listen((GoogleSignInAccount? googleAccount) {
+      _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? googleAccount) {
         setState(() {
           account = googleAccount;
         });
@@ -322,8 +317,7 @@ class _SettingsState extends State<Settings> {
     } else {
       final LocalAuthentication auth = LocalAuthentication();
 
-      final List<BiometricType> availableBiometrics =
-          await auth.getAvailableBiometrics();
+      final List<BiometricType> availableBiometrics = await auth.getAvailableBiometrics();
 
       if (availableBiometrics.isNotEmpty) {
         if (availableBiometrics.contains(BiometricType.fingerprint) ||
@@ -335,8 +329,7 @@ class _SettingsState extends State<Settings> {
             );
             if (didAuthenticate) {
               applockfun(true);
-              successalertshowSnackBar(
-                  context, "Successfully Finger Print App Lock Set");
+              successalertshowSnackBar(context, "Successfully Finger Print App Lock Set");
             } else {
               applockfun(false);
               erroralertshowSnackBar(context, "Can't Add Finger Added Print");
@@ -345,12 +338,11 @@ class _SettingsState extends State<Settings> {
             erroralertshowSnackBar(context, e.toString());
           }
         } else {
-          erroralertshowSnackBar(context,
-              "Finger Print Not Support this Device ${availableBiometrics.toList().toString()} ");
+          erroralertshowSnackBar(
+              context, "Finger Print Not Support this Device ${availableBiometrics.toList().toString()} ");
         }
       } else {
-        erroralertshowSnackBar(
-            context, "Finger Print Not Support this Devices");
+        erroralertshowSnackBar(context, "Finger Print Not Support this Devices");
       }
     }
   }
@@ -420,12 +412,12 @@ class _SettingsState extends State<Settings> {
 
   logout() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return confirmationAlertbox(
-            context, "Logout", "Are you sure want to logout?")
-        .then((value) async {
+    DateService dbservice = DateService();
+    return confirmationAlertbox(context, "Logout", "Are you sure want to logout?").then((value) async {
       if (value != null) {
         if (value) {
           preferences.clear();
+          dbservice.clearProfile();
           await _googleSignIn.signOut();
           Navigator.push(
             context,
@@ -496,11 +488,8 @@ class _SettingsState extends State<Settings> {
     }
 
     setState(() {
-      uid = profileList
-          .indexWhere((element) => element.profileList!.makedefault == 1);
-      aid = profileList[uid]
-          .accountlist!
-          .indexWhere((element) => element.makedefault == 1);
+      uid = profileList.indexWhere((element) => element.profileList!.makedefault == 1);
+      aid = profileList[uid].accountlist!.indexWhere((element) => element.makedefault == 1);
       profileImage = profileList[uid].profileList!.profileimage!;
     });
   }
@@ -649,8 +638,7 @@ class _SettingsState extends State<Settings> {
                 width: 40,
               ),
               title: Text(
-                localizedValues[language]!["settings"]![
-                    "google-drive-settings"]!,
+                localizedValues[language]!["settings"]!["google-drive-settings"]!,
               ),
             ),
           if (io.Platform.isAndroid)
@@ -668,11 +656,8 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
               ),
-              title: Text(
-                  localizedValues[language]!["settings"]!["google-account"]!),
-              subtitle: account == null
-                  ? const Text("Choose an account")
-                  : Text(account!.email.toString()),
+              title: Text(localizedValues[language]!["settings"]!["google-account"]!),
+              subtitle: account == null ? const Text("Choose an account") : Text(account!.email.toString()),
             ),
           if (io.Platform.isAndroid) const Divider(),
           if (io.Platform.isAndroid)
@@ -687,8 +672,7 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
               ),
-              title:
-                  Text(localizedValues[language]!["settings"]!["Last-Backup"]!),
+              title: Text(localizedValues[language]!["settings"]!["Last-Backup"]!),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -756,8 +740,7 @@ class _SettingsState extends State<Settings> {
               ),
             ),
             title: Text(localizedValues[language]!["settings"]!["category"]!),
-            subtitle: Text(
-                localizedValues[language]!["settings"]!["category-subtitle"]!),
+            subtitle: Text(localizedValues[language]!["settings"]!["category-subtitle"]!),
           ),
           ListTile(
             onTap: () {
@@ -773,8 +756,7 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
             ),
-            title:
-                Text(localizedValues[language]!["settings"]!["theme-title"]!),
+            title: Text(localizedValues[language]!["settings"]!["theme-title"]!),
             subtitle: Text(
               changethemename,
             ),
@@ -791,8 +773,7 @@ class _SettingsState extends State<Settings> {
               ),
             ),
             title: Text(localizedValues[language]!["settings"]!["app-lock"]!),
-            subtitle: Text(
-                localizedValues[language]!["settings"]!["app-lock-subtitle"]!),
+            subtitle: Text(localizedValues[language]!["settings"]!["app-lock-subtitle"]!),
             trailing: Checkbox(
               value: applock,
               onChanged: (value) {
@@ -848,11 +829,14 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
             ),
-            title:
-                Text(localizedValues[language]!["settings"]!["app-version"]!),
-            subtitle: Text(
-              "1.0.2\n${localizedValues[language]!["settings"]!["app-version-subtitle"]!}",
-            ),
+            title: Text(localizedValues[language]!["settings"]!["app-version"]!),
+            subtitle: io.Platform.isAndroid
+                ? Text(
+                    "1.0.2\n${localizedValues[language]!["settings"]!["app-version-subtitle"]!}",
+                  )
+                : const Text(
+                    "1.0.2",
+                  ),
           ),
           if (io.Platform.isAndroid)
             ListTile(

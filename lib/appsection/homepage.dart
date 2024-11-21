@@ -41,8 +41,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   late TabController tabController;
 
   var userSerive = DateService();
@@ -70,8 +69,7 @@ class _HomePageState extends State<HomePage>
       } else {
         log("Note has been Saved");
         noteDataModel.notetodo = todotext.text;
-        noteDataModel.transcationdate =
-            DateTime.parse(notenormal).toIso8601String();
+        noteDataModel.transcationdate = DateTime.parse(notenormal).toIso8601String();
         var result = await userSerive.saveNote(noteDataModel);
         log("Result : ${result.toString()}");
         if (result > 0 && result != null) {
@@ -147,6 +145,7 @@ class _HomePageState extends State<HomePage>
   void getuser() async {
     // var database = DateService();
     var data = await userSerive.readAllDataProfile();
+    print(data);
     for (var profile in data) {
       ProfileDataModel profileDataModel = ProfileDataModel();
 
@@ -192,11 +191,8 @@ class _HomePageState extends State<HomePage>
     }
 
     setState(() {
-      uid = profileList
-          .indexWhere((element) => element.profileList!.makedefault == 1);
-      aid = profileList[uid]
-          .accountlist!
-          .indexWhere((element) => element.makedefault == 1);
+      uid = profileList.indexWhere((element) => element.profileList!.makedefault == 1);
+      aid = profileList[uid].accountlist!.indexWhere((element) => element.makedefault == 1);
       profileImage = profileList[uid].profileList!.profileimage!;
     });
   }
@@ -368,8 +364,7 @@ class _HomePageState extends State<HomePage>
                       width: tabsize,
                       child: Center(
                         child: Text(
-                          localizedValues[language]!["home"]!["bar2"]!
-                              .toUpperCase(),
+                          localizedValues[language]!["home"]!["bar2"]!.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 12,
@@ -383,8 +378,7 @@ class _HomePageState extends State<HomePage>
                       width: tabsize,
                       child: Center(
                         child: Text(
-                          localizedValues[language]!["home"]!["bar3"]!
-                              .toUpperCase(),
+                          localizedValues[language]!["home"]!["bar3"]!.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 12,
@@ -398,8 +392,7 @@ class _HomePageState extends State<HomePage>
                       width: tabsize,
                       child: Center(
                         child: Text(
-                          localizedValues[language]!["home"]!["bar4"]!
-                              .toUpperCase(),
+                          localizedValues[language]!["home"]!["bar4"]!.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 12,
@@ -806,15 +799,12 @@ class _ShowBottomModelSheetState extends State<ShowBottomModelSheet> {
                   crossAxisSpacing: 5,
                 ),
                 children: [
-                  for (var element in categoryList.where(
-                      (element) => element.iSincome == (crttab == 0 ? 1 : 2)))
+                  for (var element in categoryList.where((element) => element.iSincome == (crttab == 0 ? 1 : 2)))
                     GestureDetector(
                       onTap: () {
                         setState(() {
                           categoryName = element.name!;
-                          categoryIcon = element.custom == 0
-                              ? geticonfun(element.name!)
-                              : null;
+                          categoryIcon = element.custom == 0 ? geticonfun(element.name!) : null;
                         });
                         Navigator.pop(context);
                       },
@@ -837,9 +827,7 @@ class _ShowBottomModelSheetState extends State<ShowBottomModelSheet> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            element.name!
-                                                .toUpperCase()
-                                                .substring(0, 2),
+                                            element.name!.toUpperCase().substring(0, 2),
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 15,
@@ -929,9 +917,7 @@ class _ShowBottomModelSheetState extends State<ShowBottomModelSheet> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: crttab == 0
-                              ? const Color(0xff6666ff)
-                              : const Color(0xffe6e6ff),
+                          color: crttab == 0 ? const Color(0xff6666ff) : const Color(0xffe6e6ff),
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: Center(
@@ -957,9 +943,7 @@ class _ShowBottomModelSheetState extends State<ShowBottomModelSheet> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: crttab == 1
-                              ? const Color(0xff6666ff)
-                              : const Color(0xffe6e6ff),
+                          color: crttab == 1 ? const Color(0xff6666ff) : const Color(0xffe6e6ff),
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: Center(
@@ -1000,8 +984,7 @@ class _ShowBottomModelSheetState extends State<ShowBottomModelSheet> {
                               width: 30,
                               height: 30,
                               child: Center(
-                                child: categoryIcon == null &&
-                                        categoryName.isNotEmpty
+                                child: categoryIcon == null && categoryName.isNotEmpty
                                     ? Container(
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
@@ -1009,9 +992,7 @@ class _ShowBottomModelSheetState extends State<ShowBottomModelSheet> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            categoryName
-                                                .substring(0, 1)
-                                                .toUpperCase(),
+                                            categoryName.substring(0, 1).toUpperCase(),
                                             style: const TextStyle(
                                               fontSize: 16,
                                               color: Colors.white,
@@ -1178,11 +1159,8 @@ class _ChanageUserAlertBoxState extends State<ChanageUserAlertBox> {
               ListTile(
                 onTap: () {
                   setState(() {
-                    uid = profileList.indexWhere(
-                        (element) => element.profileList!.makedefault == 1);
-                    aid = profileList[uid]
-                        .accountlist!
-                        .indexWhere((element) => element.makedefault == 1);
+                    uid = profileList.indexWhere((element) => element.profileList!.makedefault == 1);
+                    aid = profileList[uid].accountlist!.indexWhere((element) => element.makedefault == 1);
                     uid = i;
                     aid = 0;
                   });
@@ -1202,10 +1180,8 @@ class _ChanageUserAlertBoxState extends State<ChanageUserAlertBox> {
                     ),
                   ),
                 ),
-                title:
-                    Text(profileList[i].profileList!.profilename!.toString()),
-                subtitle: Text(
-                    profileList[i].profileList!.profilepurpose!.toString()),
+                title: Text(profileList[i].profileList!.profilename!.toString()),
+                subtitle: Text(profileList[i].profileList!.profilepurpose!.toString()),
                 trailing: Text(
                   profileList[i].profileList!.makedefault == 1 ? "DEFAULT" : "",
                   style: TextStyle(

@@ -6,6 +6,7 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import '../appsection/settings/profile/utliti/imagepick.dart';
 import 'initiateaccount.dart';
 
@@ -80,18 +81,21 @@ class _InitiateprofileState extends State<Initiateprofile> {
 
   submitEvent() async {
     if (imageFile != null) {
+      var file = await saveUserPhotoLocal(imageFile!);
       if (profileName.isNotEmpty) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => InitiateAccount(
-              profileName: profileName,
-              profilePurpose: profilePurpose,
-              information: information,
-              image: imageFile!,
+        if (file != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => InitiateAccount(
+                profileName: profileName,
+                profilePurpose: profilePurpose,
+                information: information,
+                image: file,
+              ),
             ),
-          ),
-        );
+          );
+        }
       } else {
         if (profileName.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -116,6 +120,28 @@ class _InitiateprofileState extends State<Initiateprofile> {
           content: Text("Please select profile image to countinue"),
         ),
       );
+    }
+  }
+
+  Future<File?> saveUserPhotoLocal(File path) async {
+    try {
+      // Get the app's documents directory
+      final directory = await getApplicationDocumentsDirectory();
+      final filePath = '${directory.path}/user_photo.jpg';
+
+      // Read the file as bytes from the source path
+      final sourceFile = path;
+      final fileBytes = await sourceFile.readAsBytes();
+
+      // Write the bytes to a new file in the app's directory
+      final file = File(filePath);
+      await file.writeAsBytes(fileBytes);
+
+      print(file.path);
+
+      return file;
+    } catch (e) {
+      return null;
     }
   }
 
@@ -323,9 +349,7 @@ class _EditProfileNameDialogState extends State<EditProfileNameDialog> {
         top: 20,
         right: 20,
         left: 20,
-        bottom: MediaQuery.of(context).viewInsets.bottom == 0
-            ? 20
-            : MediaQuery.of(context).viewInsets.bottom + 10.0,
+        bottom: MediaQuery.of(context).viewInsets.bottom == 0 ? 20 : MediaQuery.of(context).viewInsets.bottom + 10.0,
       ),
       child: Form(
         key: profileKey,
@@ -389,8 +413,7 @@ class EditProfilePurposeDialog extends StatefulWidget {
   const EditProfilePurposeDialog({super.key, required this.profilePurpose});
 
   @override
-  State<EditProfilePurposeDialog> createState() =>
-      _EditProfilePurposeDialogState();
+  State<EditProfilePurposeDialog> createState() => _EditProfilePurposeDialogState();
 }
 
 class _EditProfilePurposeDialogState extends State<EditProfilePurposeDialog> {
@@ -418,9 +441,7 @@ class _EditProfilePurposeDialogState extends State<EditProfilePurposeDialog> {
         top: 20,
         right: 20,
         left: 20,
-        bottom: MediaQuery.of(context).viewInsets.bottom == 0
-            ? 20
-            : MediaQuery.of(context).viewInsets.bottom + 10.0,
+        bottom: MediaQuery.of(context).viewInsets.bottom == 0 ? 20 : MediaQuery.of(context).viewInsets.bottom + 10.0,
       ),
       child: Form(
         key: profileKey,
@@ -480,12 +501,10 @@ class EditProfileinformationDialog extends StatefulWidget {
   const EditProfileinformationDialog({super.key, required this.information});
 
   @override
-  State<EditProfileinformationDialog> createState() =>
-      _EditProfileinformationDialogState();
+  State<EditProfileinformationDialog> createState() => _EditProfileinformationDialogState();
 }
 
-class _EditProfileinformationDialogState
-    extends State<EditProfileinformationDialog> {
+class _EditProfileinformationDialogState extends State<EditProfileinformationDialog> {
   TextEditingController profileInformation = TextEditingController();
 
   final profileKey = GlobalKey<FormState>();
@@ -510,9 +529,7 @@ class _EditProfileinformationDialogState
         top: 20,
         right: 20,
         left: 20,
-        bottom: MediaQuery.of(context).viewInsets.bottom == 0
-            ? 20
-            : MediaQuery.of(context).viewInsets.bottom + 10.0,
+        bottom: MediaQuery.of(context).viewInsets.bottom == 0 ? 20 : MediaQuery.of(context).viewInsets.bottom + 10.0,
       ),
       child: Form(
         key: profileKey,

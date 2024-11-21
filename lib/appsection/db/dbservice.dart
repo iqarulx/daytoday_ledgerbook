@@ -99,8 +99,7 @@ class DateService {
   }
 
   updateNote(NoteModel modeldata, String itemdate) async {
-    return await _repository.updateNoteDetails(
-        'notetb', itemdate, modeldata.dataMap());
+    return await _repository.updateNoteDetails('notetb', itemdate, modeldata.dataMap());
   }
 
   updateaccountDefault(Map<String, Object?> values, int uid) async {
@@ -122,5 +121,9 @@ class DateService {
 
   updatePorfileSet(int uid, Map<String, Object?> values) async {
     return await _repository.updateProfileDetails('profile', values, uid);
+  }
+
+  clearProfile() async {
+    return await _repository.deleteDatabase();
   }
 }

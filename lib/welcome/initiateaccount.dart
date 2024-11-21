@@ -179,8 +179,7 @@ class _InitiateAccountState extends State<InitiateAccount> {
         profileAccountModel.balance = int.parse(openingBalance);
         profileAccountModel.deleteprofie = 0;
         profileAccountModel.makedefault = 1;
-        var accountResult =
-            await dateService.createProfileAccount(profileAccountModel);
+        var accountResult = await dateService.createProfileAccount(profileAccountModel);
         if (accountResult > 0) {
           SharedPreferences preferences = await SharedPreferences.getInstance();
           setState(() {
@@ -402,9 +401,7 @@ class _EditAccountBoxState extends State<EditAccountBox> {
         top: 20,
         right: 20,
         left: 20,
-        bottom: MediaQuery.of(context).viewInsets.bottom == 0
-            ? 20
-            : MediaQuery.of(context).viewInsets.bottom + 10.0,
+        bottom: MediaQuery.of(context).viewInsets.bottom == 0 ? 20 : MediaQuery.of(context).viewInsets.bottom + 10.0,
       ),
       child: Form(
         key: accountkey,
