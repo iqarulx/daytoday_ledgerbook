@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../constants/constants.dart';
-import '../../model/src/user_model.dart';
+import '/constants/constants.dart';
+import '/model/model.dart';
 
 class Db {
   Db._internal();

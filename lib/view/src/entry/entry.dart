@@ -1,15 +1,11 @@
-import 'package:daytoday_ledgerbook/constants/constants.dart';
-import 'package:daytoday_ledgerbook/functions/screens/screens_functions.dart';
-import 'package:daytoday_ledgerbook/model/src/entry_model.dart';
-import 'package:daytoday_ledgerbook/services/db/db.dart';
-import 'package:daytoday_ledgerbook/ui/src/sheets/src/account_list.dart';
-import 'package:daytoday_ledgerbook/ui/src/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../../../services/src/color/app_colors.dart';
-import '../../../ui/src/form_fields.dart';
-import '../../../utils/utils.dart';
+import '/constants/constants.dart';
+import '/functions/functions.dart';
+import '/model/model.dart';
+import '/services/services.dart';
+import '/ui/ui.dart';
+import '/utils/utils.dart';
 
 class Entry extends StatefulWidget {
   const Entry({super.key});

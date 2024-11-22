@@ -1,8 +1,6 @@
-import 'package:daytoday_ledgerbook/constants/constants.dart';
-import 'package:daytoday_ledgerbook/model/src/entry_model.dart';
-import 'package:daytoday_ledgerbook/services/db/db.dart';
-
-import 'config.dart';
+import '/constants/constants.dart';
+import '/model/model.dart';
+import '/services/services.dart';
 
 class ScreenService {
   static Config firebase = Config();

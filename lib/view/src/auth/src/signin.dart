@@ -4,20 +4,17 @@
   found in the LICENSE file.
 */
 
-import 'package:daytoday_ledgerbook/ui/ui.dart';
-import 'package:daytoday_ledgerbook/view/src/auth/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../functions/auth/auth_functions.dart';
-import '../../../services/db/db.dart';
-import '../../../services/src/color/app_colors.dart';
-import '../../../ui/src/snackbar.dart';
-import '../../../utils/src/assets.dart';
-import '../home/home.dart';
+import '/functions/functions.dart';
+import '/services/services.dart';
+import '/ui/ui.dart';
+import '/utils/utils.dart';
+import '/view/view.dart';
 
 class Signin extends StatefulWidget {
   const Signin({super.key});

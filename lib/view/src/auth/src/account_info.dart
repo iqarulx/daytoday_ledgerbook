@@ -1,17 +1,14 @@
-import 'package:daytoday_ledgerbook/functions/auth/auth_functions.dart';
-import 'package:daytoday_ledgerbook/model/src/account_model.dart';
-import 'package:daytoday_ledgerbook/model/src/user_model.dart';
-import 'package:daytoday_ledgerbook/services/db/db.dart';
-import 'package:daytoday_ledgerbook/ui/src/form_fields.dart';
-import 'package:daytoday_ledgerbook/ui/src/snackbar.dart';
-import 'package:daytoday_ledgerbook/ui/ui.dart';
-import 'package:daytoday_ledgerbook/view/src/auth/signin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uuid/uuid.dart';
-import '../../../services/src/color/app_colors.dart';
+
+import '/functions/functions.dart';
+import '/model/model.dart';
+import '/services/services.dart';
+import '/ui/ui.dart';
+import '/view/view.dart';
 
 class AccountInfo extends StatefulWidget {
   final String profileName;

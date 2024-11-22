@@ -1,18 +1,13 @@
 import 'dart:io';
-
-import 'package:daytoday_ledgerbook/functions/image/image_funcions.dart';
-import 'package:daytoday_ledgerbook/ui/src/form_fields.dart';
-import 'package:daytoday_ledgerbook/ui/src/sheets/src/gallery_option.dart';
-import 'package:daytoday_ledgerbook/ui/src/snackbar.dart';
-import 'package:daytoday_ledgerbook/utils/src/assets.dart';
-import 'package:daytoday_ledgerbook/view/src/auth/account_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../services/src/color/app_colors.dart';
-import '../../../utils/src/pick_image.dart';
-import '../../../utils/utils.dart';
+import '/functions/functions.dart';
+import '/services/services.dart';
+import '/ui/ui.dart';
+import '/utils/utils.dart';
+import '/view/view.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});

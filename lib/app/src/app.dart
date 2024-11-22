@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../ui/ui.dart';
 import 'app_utils.dart';
+import '/ui/ui.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

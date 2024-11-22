@@ -1,11 +1,9 @@
-import 'package:daytoday_ledgerbook/functions/screens/screens_functions.dart';
-import 'package:daytoday_ledgerbook/model/src/account_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../services/src/color/app_colors.dart';
-import '../../../ui.dart';
-import '../../form_fields.dart';
-import '../../snackbar.dart';
+import '/functions/functions.dart';
+import '/model/model.dart';
+import '/services/services.dart';
+import '/ui/ui.dart';
 
 class AccountList extends StatefulWidget {
   const AccountList({super.key});

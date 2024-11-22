@@ -1,10 +1,9 @@
-import 'package:daytoday_ledgerbook/view/src/auth/signin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../services/db/db.dart';
-import '../../ui/src/c_dialog.dart';
-import '../../ui/src/snackbar.dart';
+import '/services/services.dart';
+import '/ui/ui.dart';
+import '/view/view.dart';
 
 void logout(context) async {
   await showDialog(

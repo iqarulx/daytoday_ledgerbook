@@ -1,8 +1,6 @@
 import 'dart:io';
-
-import 'package:daytoday_ledgerbook/services/firebase/storage.dart';
-import 'package:daytoday_ledgerbook/ui/src/snackbar.dart';
-import 'package:daytoday_ledgerbook/ui/ui.dart';
+import '/ui/ui.dart';
+import '/services/services.dart';
 import 'package:flutter/cupertino.dart';
 
 class ImageFuncions {

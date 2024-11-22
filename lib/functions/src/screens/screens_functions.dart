@@ -1,5 +1,5 @@
-import 'package:daytoday_ledgerbook/model/src/entry_model.dart';
-import 'package:daytoday_ledgerbook/services/firebase/screen_service.dart';
+import '/model/model.dart';
+import '/services/services.dart';
 
 class ScreensFunctions {
   static Future<Map<String, dynamic>> getAccounts() async {

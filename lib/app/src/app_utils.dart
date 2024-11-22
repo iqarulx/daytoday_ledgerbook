@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../services/db/db.dart';
-import '../../services/src/theme/theme.dart';
-import '../../view/src/auth/signin.dart';
-import '../../view/src/home/home.dart';
+
+import '/services/services.dart';
+import '/view/view.dart';
 
 class AuthProvider with ChangeNotifier {
   bool _isLoggedIn = false;

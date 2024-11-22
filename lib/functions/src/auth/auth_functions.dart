@@ -1,6 +1,5 @@
-import 'package:daytoday_ledgerbook/model/src/account_model.dart';
-import 'package:daytoday_ledgerbook/model/src/user_model.dart';
-import 'package:daytoday_ledgerbook/services/firebase/auth_service.dart';
+import '/model/model.dart';
+import '/services/services.dart';
 
 class AuthFunctions {
   static Future<String> registerAccount(UserModel model) async {

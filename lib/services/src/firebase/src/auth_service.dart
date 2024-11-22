@@ -1,5 +1,5 @@
-import 'package:daytoday_ledgerbook/model/src/user_model.dart';
-import 'package:daytoday_ledgerbook/services/firebase/config.dart';
+import '/model/model.dart';
+import '/services/services.dart';
 
 class AuthService {
   static Config firebase = Config();
