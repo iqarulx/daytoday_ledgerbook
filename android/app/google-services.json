@@ -1,95 +1,45 @@
 {
   "project_info": {
-    "project_number": "869770397358",
-    "project_id": "sri-softwarez-daytoday",
-    "storage_bucket": "sri-softwarez-daytoday.firebasestorage.app"
+    "project_number": "172051736995",
+    "project_id": "app-tester-4aa51",
+    "storage_bucket": "app-tester-4aa51.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:869770397358:android:d456a3458c235e14208f3f",
+        "mobilesdk_app_id": "1:172051736995:android:eced9b4f0ef083b79c1216",
         "android_client_info": {
-          "package_name": "com.srisoftwarez.daytoday"
+          "package_name": "com.srisoftwarez.app_tester"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "869770397358-cacfgq70bsehi4mm6md09qkpdfj2s5u5.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.srisoftwarez.daytoday",
-            "certificate_hash": "0bba845824adca6f7dd79c2d19d827b3c6637773"
-          }
-        },
-        {
-          "client_id": "869770397358-mqjnie0guc7amlrnsaeei5abcg5a9ov1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.srisoftwarez.daytoday",
-            "certificate_hash": "59a2ad79a321df23b95c5c0ec6962e2c5033f2be"
-          }
-        },
-        {
-          "client_id": "869770397358-2tqi9kuqfbc84vsbvbtmvflf959q74e1.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCxYYHbv7nwf_wGTnMnibkBWLb3Wk0qet4"
+          "current_key": "AIzaSyBdrZXy1Fi4zxxUgo_sYqj2b8gAEFski2w"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "869770397358-2tqi9kuqfbc84vsbvbtmvflf959q74e1.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "869770397358-2aokoo8k1v353pt32uk2t7d0ntclgoq7.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.srisoftwarez.daytoday"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:869770397358:android:60da780acd223231208f3f",
+        "mobilesdk_app_id": "1:172051736995:android:20df20b806b28b799c1216",
         "android_client_info": {
           "package_name": "com.srisoftwarez.daytoday_ledgerbook"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "869770397358-2tqi9kuqfbc84vsbvbtmvflf959q74e1.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCxYYHbv7nwf_wGTnMnibkBWLb3Wk0qet4"
+          "current_key": "AIzaSyBdrZXy1Fi4zxxUgo_sYqj2b8gAEFski2w"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "869770397358-2tqi9kuqfbc84vsbvbtmvflf959q74e1.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "869770397358-2aokoo8k1v353pt32uk2t7d0ntclgoq7.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.srisoftwarez.daytoday"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

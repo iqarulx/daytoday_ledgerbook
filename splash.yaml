@@ -3,15 +3,15 @@ flutter_native_splash:
   ios: true
   web: false
 
-  background_image: "assets/logo/splash_light.png"
-  image: "assets/logo/logo.png"
+  background_image: "assets/images/splash_light.png"
+  image: "assets/images/logo_splash.png"
   # branding: "assets/splash/branding.png"
 
-  background_image_dark: "assets/logo/splash_light.png"
-  image_dark: "assets/logo/logo.png"
+  background_image_dark: "assets/images/splash_light.png"
+  image_dark: "assets/images/logo_splash.png"
   # branding_dark: "assets/splash/branding_dark.png"
 
   android_12:
     color: "#FFFFFF"
-    image: "assets/logo/logo.png"
+    image: "assets/images/logo_splash.png"
     # branding: "assets/splash/android_branding.png"

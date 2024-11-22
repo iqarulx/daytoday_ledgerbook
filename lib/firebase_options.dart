@@ -50,21 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCxYYHbv7nwf_wGTnMnibkBWLb3Wk0qet4',
-    appId: '1:869770397358:android:60da780acd223231208f3f',
-    messagingSenderId: '869770397358',
-    projectId: 'sri-softwarez-daytoday',
-    storageBucket: 'sri-softwarez-daytoday.firebasestorage.app',
+    apiKey: 'AIzaSyBdrZXy1Fi4zxxUgo_sYqj2b8gAEFski2w',
+    appId: '1:172051736995:android:20df20b806b28b799c1216',
+    messagingSenderId: '172051736995',
+    projectId: 'app-tester-4aa51',
+    storageBucket: 'app-tester-4aa51.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDD60Ds3jm1cI7ja2OMWgYtXK4sD7c6QSY',
-    appId: '1:869770397358:ios:a4d4f28665827f4e208f3f',
-    messagingSenderId: '869770397358',
-    projectId: 'sri-softwarez-daytoday',
-    storageBucket: 'sri-softwarez-daytoday.firebasestorage.app',
-    androidClientId: '869770397358-c6tv6t1mcsbp7e9651gvp2djrm2uui3n.apps.googleusercontent.com',
-    iosClientId: '869770397358-jmqfpvvcvrj21kvm6csletcio9g1qcg5.apps.googleusercontent.com',
+    apiKey: 'AIzaSyA0NF1X0hDmOj0blIJWaCuIUPQZ_-bqTyU',
+    appId: '1:172051736995:ios:82a3567ae90f76fb9c1216',
+    messagingSenderId: '172051736995',
+    projectId: 'app-tester-4aa51',
+    storageBucket: 'app-tester-4aa51.appspot.com',
     iosBundleId: 'com.srisoftwarez.daytodayLedgerbook',
   );
 
