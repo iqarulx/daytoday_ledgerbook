@@ -1,3 +1,4 @@
+import '/constants/constants.dart';
 import '/model/model.dart';
 import '/services/services.dart';
 
@@ -52,6 +53,38 @@ class AuthService {
       return {"status": false, "msg": "No accounts found"};
     } catch (e) {
       return {"status": false, "msg": e.toString()};
+    }
+  }
+
+  static Future deleteAccount() async {
+    try {
+      var uid = await Db.getData(type: UserData.uid);
+
+      // Account data
+      var ar = await firebase.users.doc(uid).get();
+      var pi = ar["profileImage"];
+      await firebase.users.doc(uid).delete();
+
+      // Delete image
+      await Storage.deleteImage(pi);
+
+      // Expense data
+      var er = await firebase.expenses.where('uid', isEqualTo: uid).get();
+      if (er.docs.isNotEmpty) {
+        for (var i in er.docs) {
+          await firebase.expenses.doc(i.id).delete();
+        }
+      }
+
+      // Notes data
+      var nr = await firebase.notes.where('userId', isEqualTo: uid).get();
+      if (nr.docs.isNotEmpty) {
+        for (var i in nr.docs) {
+          await firebase.notes.doc(i.id).delete();
+        }
+      }
+    } catch (e) {
+      throw e.toString();
     }
   }
 }

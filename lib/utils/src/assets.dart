@@ -33,4 +33,6 @@ class SvgAssets {
   static const String sun = 'assets/svg/sun.svg';
   static const String language = 'assets/svg/language.svg';
   static const String excel = 'assets/svg/excel.svg';
+  static const String danger = 'assets/svg/danger.svg';
+  static const String arrow = 'assets/svg/arrow.svg';
 }

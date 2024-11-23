@@ -90,6 +90,7 @@ class _AccountInfoState extends State<AccountInfo> {
             FormFields(
               controller: openingBalance,
               label: "Opening Balance",
+              keyType: TextInputType.number,
             ),
             const SizedBox(height: 10),
             FormFields(
