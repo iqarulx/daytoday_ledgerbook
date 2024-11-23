@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:open_app_settings/open_app_settings.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '/app/app.dart';
 import '/services/services.dart';
 import '/ui/ui.dart';
 import '/utils/utils.dart';
@@ -21,6 +23,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   bool _notEnabled = false;
   String appVersion = "";
+  String _theme = "";
 
   @override
   void initState() {
@@ -43,6 +46,7 @@ class _SettingsState extends State<Settings> {
       var v = await AppInfo.getVersion();
       appVersion = v;
     }
+    _theme = await Db.getTheme() ?? 'light';
 
     setState(() {});
   }
@@ -161,6 +165,67 @@ class _SettingsState extends State<Settings> {
                     }
                   }
                 });
+              },
+            ),
+          ),
+          Divider(color: Colors.grey.shade300),
+          ListTile(
+            onTap: () {
+              final themeProvider =
+                  Provider.of<ThemeProvider>(context, listen: false);
+              final currentTheme = themeProvider.appTheme == AppTheme.appTheme
+                  ? "dark"
+                  : "light";
+              themeProvider.changeTheme(currentTheme);
+              _init();
+              setState(() {});
+            },
+            leading: CircleAvatar(
+              backgroundColor: Theme.of(context).primaryColor,
+              child: SvgPicture.asset(
+                SvgAssets.palette,
+                height: 20,
+                width: 20,
+              ),
+            ),
+            title: const Text(
+              "Theme",
+              overflow: TextOverflow.ellipsis,
+            ),
+            subtitle: Text(
+              _theme,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            trailing: IconButton(
+              tooltip: "Change theme",
+              icon: SvgPicture.asset(
+                SvgAssets.paletteDark,
+                height: 30,
+                width: 30,
+              ),
+              onPressed: () async {
+                var v = await Sheet.showSheet(context,
+                    size: 0.35, widget: const ThemeOption());
+                if (v != null) {
+                  String theme;
+                  if (v == 1) {
+                    theme = "light";
+                  } else if (v == 2) {
+                    theme = "teal";
+                  } else if (v == 3) {
+                    theme = "lavendar";
+                  } else if (v == 4) {
+                    theme = "dark";
+                  } else {
+                    theme = "light";
+                  }
+                  final themeProvider =
+                      Provider.of<ThemeProvider>(context, listen: false);
+
+                  themeProvider.changeTheme(theme);
+                  _init();
+                  setState(() {});
+                }
               },
             ),
           ),

@@ -33,6 +33,7 @@ class _ProfileState extends State<Profile> {
   }
 
   _getProfile() async {
+    _accList.clear();
     var d = await ScreensFunctions.getAccounts();
     data = d;
     if (d.isNotEmpty) {

@@ -38,7 +38,11 @@ class ThemeProvider with ChangeNotifier {
     if (theme != null) {
       if (theme == "light") {
         _appTheme = AppTheme.appTheme;
-      } else {
+      } else if (theme == "teal") {
+        _appTheme = AppTheme.tealTheme;
+      } else if (theme == "lavendar") {
+        _appTheme = AppTheme.lavendarTheme;
+      } else if (theme == "dark") {
         _appTheme = AppTheme.darkTheme;
       }
     } else {
@@ -50,6 +54,10 @@ class ThemeProvider with ChangeNotifier {
   Future<void> changeTheme(String theme) async {
     if (theme == "light") {
       _appTheme = AppTheme.appTheme;
+    } else if (theme == "teal") {
+      _appTheme = AppTheme.tealTheme;
+    } else if (theme == "lavendar") {
+      _appTheme = AppTheme.lavendarTheme;
     } else if (theme == "dark") {
       _appTheme = AppTheme.darkTheme;
     }

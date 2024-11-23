@@ -590,8 +590,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           }
         } else if (_tableTabController!.index == 1) {
           if (_weeklyList.isNotEmpty) {
-            var r = XlsExport(type: ExportType.daily, daily: _dailyList);
-            var d = await r.dailyExcel();
+            var r = XlsExport(type: ExportType.weekly, weekly: _weeklyList);
+            var d = await r.weeklyExcel();
             await FileUtils.openAsBytes(context, d, "weekly_report", "xls");
           } else {
             Snackbar.showSnackBar(context,
@@ -599,8 +599,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           }
         } else if (_tableTabController!.index == 2) {
           if (_monthlyList.isNotEmpty) {
-            var r = XlsExport(type: ExportType.daily, daily: _dailyList);
-            var d = await r.dailyExcel();
+            var r = XlsExport(type: ExportType.monthly, monthly: _monthlyList);
+            var d = await r.monhtlyExcel();
             await FileUtils.openAsBytes(context, d, "monthly_report", "xls");
           } else {
             Snackbar.showSnackBar(context,
@@ -608,8 +608,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           }
         } else if (_tableTabController!.index == 3) {
           if (_yearlyList.isNotEmpty) {
-            var r = XlsExport(type: ExportType.daily, daily: _dailyList);
-            var d = await r.dailyExcel();
+            var r = XlsExport(type: ExportType.yearly, yearly: _yearlyList);
+            var d = await r.yearlyExcel();
             await FileUtils.openAsBytes(context, d, "yearly_report", "xls");
           } else {
             Snackbar.showSnackBar(context,

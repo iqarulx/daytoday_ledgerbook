@@ -44,9 +44,19 @@ class _SigninState extends State<Signin> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-            colors: [Color(0xff5874a4), Color(0xff4a628a)],
-            tileMode: TileMode.mirror,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xff637eac),
+              Color(0xff7089b2),
+              Color(0xff7d93b9),
+              Color(0xff8a9ec0),
+              Color(0xff96a9c7),
+              Color(0xffa3b3ce),
+              Color(0xffb0bed5),
+              Color(0xffbdc8db),
+              Color(0xffc9d3e2)
+            ],
+            tileMode: TileMode.clamp,
           ),
         ),
         child: SafeArea(

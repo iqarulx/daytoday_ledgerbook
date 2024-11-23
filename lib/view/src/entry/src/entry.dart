@@ -94,8 +94,8 @@ class _EntryState extends State<Entry> {
                                 topLeft: Radius.circular(10),
                               ),
                               color: entryType == "credit"
-                                  ? AppColors.primaryColor
-                                  : AppColors.secondaryColor,
+                                  ? Theme.of(context).primaryColor
+                                  : Theme.of(context).secondaryHeaderColor,
                             ),
                             child: Text(
                               "Credit",
@@ -122,8 +122,8 @@ class _EntryState extends State<Entry> {
                                 bottomRight: Radius.circular(10),
                               ),
                               color: entryType == "debit"
-                                  ? AppColors.primaryColor
-                                  : AppColors.secondaryColor,
+                                  ? Theme.of(context).primaryColor
+                                  : Theme.of(context).secondaryHeaderColor,
                             ),
                             child: Text(
                               "Debit",
