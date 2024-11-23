@@ -1,0 +1,20 @@
+{
+    "somethingWentWrong" : "Something went wrong",
+    "imageUpdated" : "Image updated",
+    "totalCacheSize" : "Total cache size is ",
+    "loading" : "Loading...",
+    "clear" : "Clear",
+    "ok" : "Ok",
+    "back" : "Back",
+    "pdfPreview" : "Pdf Preview",
+    "searchAccount" : "Search account",
+    "cancel" : "Cancel",
+    "confirm" : "Confirm",
+    "menu" : "Menu",
+    "profile" : "Profile",
+    "notes" : "Notes",
+    "downloads" : "Downloads",
+    "settings" : "Settings",
+    "logout" : "Logout",
+    "total" : "Total"
+}

@@ -5,3 +5,4 @@ export 'src/db/db.dart';
 export 'src/downloads/downloads.dart';
 export 'src/firebase/firebase.dart';
 export 'src/theme/theme.dart';
+export 'src/export/export.dart';

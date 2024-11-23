@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-import '/constants/constants.dart';
+import '../../../../constants/constants.dart';
 import '/model/model.dart';
 import '/services/services.dart';
 
@@ -265,6 +265,53 @@ class HomeService {
           totalDebit: totalDebit.toStringAsFixed(2), // Convert to String
           balance: balance.toStringAsFixed(2), // Convert to String
         ));
+      }
+
+      return list;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  static Future<List<DailyNotesModel>> getDailyNotes() async {
+    try {
+      List<DailyNotesModel> list = [];
+      var userId = await Db.getData(type: UserData.uid);
+      var r = await firebase.notes
+          .where('userId', isEqualTo: userId)
+          .orderBy('created', descending: true)
+          .get();
+
+      if (r.docs.isNotEmpty) {
+        Map<String, List<NotesModel>> groupedExpenses = {};
+
+        for (var doc in r.docs) {
+          var data = doc.data();
+          var createdMillis = data['created'];
+          var createdDate = DateTime.fromMillisecondsSinceEpoch(createdMillis);
+          String createdDateString =
+              DateFormat('yyyy-MM-dd').format(createdDate);
+
+          NotesModel entry = NotesModel(
+            userId: data['userId'],
+            uid: data["uid"],
+            notes: data['notes'],
+            date: DateTime.fromMillisecondsSinceEpoch(data["date"]),
+            created: DateTime.fromMillisecondsSinceEpoch(data["created"]),
+          );
+
+          if (!groupedExpenses.containsKey(createdDateString)) {
+            groupedExpenses[createdDateString] = [];
+          }
+          groupedExpenses[createdDateString]!.add(entry);
+        }
+
+        groupedExpenses.forEach((date, expenses) {
+          list.add(DailyNotesModel(
+            date: date,
+            notesList: expenses,
+          ));
+        });
       }
 
       return list;

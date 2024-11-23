@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '/constants/constants.dart';
+import '../../../constants/constants.dart';
 import '/model/model.dart';
 
 class Db {
@@ -43,9 +43,15 @@ class Db {
     return null;
   }
 
-  static Future<bool?> getRV() async {
+  static Future updateData(
+      {required UserData type, required String value}) async {
     var cn = await connect();
-    return cn.getBool('receipt_volunteer');
+    if (type == UserData.profileName) {
+      return cn.setString('profileName', value);
+    } else if (type == UserData.profileImage) {
+      return cn.setString('profileImage', value);
+    }
+    return null;
   }
 
   static Future<String?> getTheme() async {

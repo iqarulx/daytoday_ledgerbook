@@ -5,3 +5,7 @@ export 'src/sheet.dart';
 export 'src/app_info.dart';
 export 'src/daily_table.dart';
 export 'src/error_display.dart';
+export 'src/date_picker.dart';
+export 'src/data_table.dart';
+export 'src/file_utils.dart';
+export 'src/open_file.dart';

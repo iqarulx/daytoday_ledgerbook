@@ -61,6 +61,16 @@ class UserModel {
     };
   }
 
+  Map<String, dynamic> toUpdateMap() {
+    return <String, dynamic>{
+      'profileImage': profileImage,
+      'profileName': profileName,
+      'purpose': purpose,
+      'additionalInfo': additionalInfo,
+      'accountList': accountList.map((x) => x.toMap()).toList(),
+    };
+  }
+
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       uid: map['uid'] as String,

@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '/constants/constants.dart';
+import '../../constants/constants.dart';
 import '/services/services.dart';
 import '/utils/utils.dart';
 import '/view/view.dart';
@@ -92,8 +92,8 @@ class _SidebarState extends State<Sidebar> {
                     CircleAvatar(
                       backgroundColor: Theme.of(context).primaryColor,
                       radius: 25,
-                      backgroundImage: NetworkImage(snapshot.data?.last ??
-                          'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png'),
+                      backgroundImage: NetworkImage(
+                          snapshot.data?.last ?? emptyProfilePhoto),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -198,6 +198,78 @@ class _SidebarState extends State<Sidebar> {
                     Navigator.push(
                       context,
                       CupertinoPageRoute(
+                        builder: (context) => const Profile(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.whiteColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Iconsax.user,
+                            color: Colors.black,
+                          ),
+                          SizedBox(width: 12),
+                          Text(
+                            "Profile",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const Notes(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.whiteColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Iconsax.note,
+                            color: Colors.black,
+                          ),
+                          SizedBox(width: 12),
+                          Text(
+                            "Notes",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
                         builder: (context) => const Downloads(),
                       ),
                     );
@@ -228,7 +300,7 @@ class _SidebarState extends State<Sidebar> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 10),
                 InkWell(
                   onTap: () {
                     Navigator.push(context,

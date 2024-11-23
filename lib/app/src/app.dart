@@ -1,3 +1,4 @@
+import 'package:daytoday_ledgerbook/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app_utils.dart';
@@ -25,7 +26,7 @@ class App extends StatelessWidget {
             // supportedLocales: AppLocalizations.supportedLocales,
             locale: localeProvider.locale,
             title: "Daybook Ledgerbook",
-            theme: themeProvider.appTheme,
+            theme: themeProvider.appTheme ?? AppTheme.appTheme,
             home: authProvider.isLoggedIn
                 ? authProvider.homeWidget ?? Container()
                 : futureWaitingLoading(context),

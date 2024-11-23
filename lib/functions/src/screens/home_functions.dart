@@ -33,4 +33,12 @@ class HomeFunctions {
       throw e.toString();
     }
   }
+
+  static Future<List<DailyNotesModel>> getDailyNotes() async {
+    try {
+      return await HomeService.getDailyNotes();
+    } catch (e) {
+      throw e.toString();
+    }
+  }
 }

@@ -41,7 +41,14 @@ class _SigninState extends State<Signin> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(color: AppColors.whiteColor),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment(0.8, 1),
+            colors: [Color(0xff5874a4), Color(0xff4a628a)],
+            tileMode: TileMode.mirror,
+          ),
+        ),
         child: SafeArea(
           child: SingleChildScrollView(
             child: ConstrainedBox(

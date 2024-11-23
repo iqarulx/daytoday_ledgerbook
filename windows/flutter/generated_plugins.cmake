@@ -7,7 +7,10 @@ list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
   firebase_core
   firebase_storage
+  flutter_localization
   permission_handler_windows
+  printing
+  syncfusion_pdfviewer_windows
   url_launcher_windows
 )
 
