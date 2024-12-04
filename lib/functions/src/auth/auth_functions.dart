@@ -35,6 +35,8 @@ class AuthFunctions {
             purpose: d["purpose"],
             password: "",
             username: "",
+            currency: d["currency"],
+            dateFormat: d["dateFormat"],
             additionalInfo: d["additionalInfo"],
             accountList: model,
           );

@@ -41,6 +41,8 @@ class AuthService {
               "uid": data.id,
               "profileName": data["profileName"],
               "profileImage": data["profileImage"],
+              "currency": data["currency"],
+              "dateFormat": data["dateFormat"],
               "purpose": data["purpose"],
               "additionalInfo": data["additionalInfo"],
               "accountList": accountList

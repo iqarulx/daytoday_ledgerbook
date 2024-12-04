@@ -4,6 +4,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uuid/uuid.dart';
 
+import '/utils/utils.dart';
 import '/functions/functions.dart';
 import '/model/model.dart';
 import '/services/services.dart';
@@ -35,10 +36,30 @@ class _AccountInfoState extends State<AccountInfo> {
   final TextEditingController bankDetails = TextEditingController();
   final TextEditingController openingBalance = TextEditingController();
   final TextEditingController accountColor = TextEditingController();
+  final TextEditingController currency = TextEditingController();
+  final TextEditingController dateFormat = TextEditingController();
   Color _color = const Color(0xff008000);
   var formKey = GlobalKey<FormState>();
   changeColor(Color color, ValueChanged<Color> updateColor) {
     updateColor(color);
+  }
+
+  @override
+  void initState() {
+    currency.addListener(() {
+      setState(() {});
+    });
+    dateFormat.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    currency.dispose();
+    dateFormat.dispose();
+    super.dispose();
   }
 
   @override
@@ -91,6 +112,78 @@ class _AccountInfoState extends State<AccountInfo> {
               controller: openingBalance,
               label: "Opening Balance",
               keyType: TextInputType.number,
+            ),
+            const SizedBox(height: 10),
+            FormFields(
+              suffixIcon: currency.text.isEmpty
+                  ? const Icon(Icons.arrow_drop_down_rounded)
+                  : IconButton(
+                      tooltip: "Clear",
+                      onPressed: () {
+                        currency.clear();
+                        setState(() {});
+                      },
+                      icon: Icon(
+                        Iconsax.close_circle,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+              controller: currency,
+              label: "Currency",
+              hintText: "Select",
+              onTap: () async {
+                var value = await Sheet.showSheet(context,
+                    size: 0.9, widget: const CurrencyList());
+                if (value != null) {
+                  currency.text = value;
+                  setState(() {});
+                }
+              },
+              readOnly: true,
+              // valid: (input) {
+              //   if (input != null) {
+              //     if (input.isEmpty) {
+              //       return 'Select site';
+              //     }
+              //   }
+              //   return null;
+              // },
+            ),
+            const SizedBox(height: 10),
+            FormFields(
+              suffixIcon: dateFormat.text.isEmpty
+                  ? const Icon(Icons.arrow_drop_down_rounded)
+                  : IconButton(
+                      tooltip: "Clear",
+                      onPressed: () {
+                        dateFormat.clear();
+                        setState(() {});
+                      },
+                      icon: Icon(
+                        Iconsax.close_circle,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+              controller: dateFormat,
+              label: "Date Format",
+              hintText: "Select",
+              onTap: () async {
+                var value = await Sheet.showSheet(context,
+                    size: 0.9, widget: const DateFormatList());
+                if (value != null) {
+                  dateFormat.text = value;
+                  setState(() {});
+                }
+              },
+              readOnly: true,
+              // valid: (input) {
+              //   if (input != null) {
+              //     if (input.isEmpty) {
+              //       return 'Select site';
+              //     }
+              //   }
+              //   return null;
+              // },
             ),
             const SizedBox(height: 10),
             FormFields(
@@ -182,6 +275,8 @@ class _AccountInfoState extends State<AccountInfo> {
         futureLoading(context);
         UserModel model = UserModel(
           uid: "",
+          currency: currency.text,
+          dateFormat: dateFormat.text,
           username: widget.username,
           password: widget.password,
           profileImage: widget.profileImageUrl,
@@ -203,6 +298,8 @@ class _AccountInfoState extends State<AccountInfo> {
         await Db.setLogin(
             model: UserModel(
           uid: r,
+          dateFormat: dateFormat.text,
+          currency: currency.text,
           username: widget.username,
           password: widget.password,
           profileImage: widget.profileImageUrl,

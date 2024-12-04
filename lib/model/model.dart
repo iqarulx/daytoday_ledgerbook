@@ -7,3 +7,5 @@ export 'src/weekly_model.dart';
 export 'src/yearly_model.dart';
 export 'src/notes_model.dart';
 export 'src/daily_notes_model.dart';
+export 'src/currency_model.dart';
+export 'src/account_edit_model.dart';

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import '../../../../constants/constants.dart';
 import '/functions/functions.dart';
 import '/model/model.dart';
 import '/services/services.dart';
 import '/ui/ui.dart';
 import '/utils/utils.dart';
 
-class Entry extends StatefulWidget {
-  const Entry({super.key});
+class EditEntry extends StatefulWidget {
+  final EntryModel query;
+  const EditEntry({super.key, required this.query});
 
   @override
-  State<Entry> createState() => _EntryState();
+  State<EditEntry> createState() => _EditEntryState();
 }
 
-class _EntryState extends State<Entry> {
+class _EditEntryState extends State<EditEntry> {
   String entryType = "credit";
   TextEditingController amount = TextEditingController();
   TextEditingController accountName = TextEditingController();
@@ -23,13 +23,12 @@ class _EntryState extends State<Entry> {
   TextEditingController description = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
-  _createEntry() async {
+  _editEntry() async {
     try {
       futureLoading(context);
-      var uid = await Db.getData(type: UserData.uid);
       EntryModel model = EntryModel(
-        uid: '',
-        userId: uid ?? '',
+        uid: widget.query.uid,
+        userId: '',
         type: entryType == "credit" ? 1 : 2,
         entry: int.parse(amount.text),
         accountId: accountId ?? '',
@@ -39,15 +38,70 @@ class _EntryState extends State<Entry> {
         created: DateTime.now(),
       );
 
-      await ScreensFunctions.createEntry(model);
+      await ScreensFunctions.editEntry(model);
+
       Navigator.pop(context);
       Snackbar.showSnackBar(context,
-          content: "New expense created", isSuccess: true);
+          content: "Expense updated", isSuccess: true);
       Navigator.pop(context, true);
     } catch (e) {
       Navigator.pop(context);
       Snackbar.showSnackBar(context, content: e.toString(), isSuccess: false);
     }
+  }
+
+  _deleteEntry() async {
+    try {
+      var v = await showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => const CDialog(
+          title: "Delete Entry",
+          content: "Are you sure want to delete entry?",
+        ),
+      );
+
+      if (v != null) {
+        if (v) {
+          futureLoading(context);
+          EntryModel model = EntryModel(
+            uid: widget.query.uid,
+            userId: '',
+            type: 0,
+            entry: 0,
+            accountId: '',
+            accountIdentification: '',
+            description: '',
+            title: '',
+            created: DateTime.now(),
+          );
+
+          await ScreensFunctions.deleteEntry(model);
+          Navigator.pop(context);
+          Snackbar.showSnackBar(context,
+              content: "Expense deleted", isSuccess: true);
+          Navigator.pop(context, true);
+        }
+      }
+    } catch (e) {
+      Navigator.pop(context);
+      Snackbar.showSnackBar(context, content: e.toString(), isSuccess: false);
+    }
+  }
+
+  @override
+  void initState() {
+    _init();
+    super.initState();
+  }
+
+  _init() {
+    entryType = widget.query.type == 1 ? "credit" : "debit";
+    amount.text = widget.query.entry.toString();
+    accountName.text = widget.query.accountIdentification;
+    accountId = widget.query.accountId;
+    title.text = widget.query.title;
+    description.text = widget.query.description;
   }
 
   @override
@@ -65,9 +119,21 @@ class _EntryState extends State<Entry> {
             key: formKey,
             child: ListView(
               children: [
-                Text(
-                  "Create new entry",
-                  style: Theme.of(context).textTheme.bodyLarge,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Edit entry",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    IconButton(
+                      tooltip: "Delete",
+                      icon: const Icon(Iconsax.trash),
+                      onPressed: () {
+                        _deleteEntry();
+                      },
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 5),
                 const Divider(),
@@ -219,13 +285,13 @@ class _EntryState extends State<Entry> {
                       ),
                     ),
                   ),
-                  child: Text("Create",
+                  child: Text("Update",
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: AppColors.pureWhiteColor,
                           )),
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
-                      _createEntry();
+                      _editEntry();
                     }
                   },
                 ),

@@ -21,6 +21,8 @@ class _ProfileState extends State<Profile> {
   String _profileName = "";
   String _purpose = "";
   String _additionalInfo = "";
+  String _currency = "";
+  String _dateFormat = "";
   String _profileImg = emptyProfilePhoto;
   final List<AccountModel> _accList = [];
   Map<String, dynamic> data = {};
@@ -41,6 +43,8 @@ class _ProfileState extends State<Profile> {
       _purpose = d["purpose"];
       _additionalInfo = d["additionalInfo"];
       _profileImg = d["profileImage"];
+      _currency = d["currency"];
+      _dateFormat = d["dateFormat"];
 
       for (var i in d["accountList"]) {
         _accList.add(AccountModel(
@@ -121,8 +125,10 @@ class _ProfileState extends State<Profile> {
                           tableData(
                               context, "Profile Name", _profileName, null),
                           tableData(context, "Purpose", _purpose, null),
-                          tableData(
-                              context, "Additional Info", _additionalInfo, null)
+                          tableData(context, "Additional Info", _additionalInfo,
+                              null),
+                          tableData(context, "Currency", _currency, null),
+                          tableData(context, "Date format", _dateFormat, null)
                         ],
                       ),
                     ],

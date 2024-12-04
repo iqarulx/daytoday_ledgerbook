@@ -3,6 +3,7 @@ import 'dart:convert';
 
 class EntryModel {
   String uid;
+  String userId;
   int type;
   int entry;
   String description;
@@ -12,6 +13,7 @@ class EntryModel {
   DateTime created;
   EntryModel({
     required this.uid,
+    required this.userId,
     required this.type,
     required this.entry,
     required this.description,
@@ -23,6 +25,7 @@ class EntryModel {
 
   EntryModel copyWith({
     String? uid,
+    String? userId,
     int? type,
     int? entry,
     String? description,
@@ -33,6 +36,7 @@ class EntryModel {
   }) {
     return EntryModel(
       uid: uid ?? this.uid,
+      userId: userId ?? this.userId,
       type: type ?? this.type,
       entry: entry ?? this.entry,
       description: description ?? this.description,
@@ -47,6 +51,7 @@ class EntryModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'uid': uid,
+      'userId': userId,
       'type': type,
       'entry': entry,
       'description': description,
@@ -57,9 +62,21 @@ class EntryModel {
     };
   }
 
+  Map<String, dynamic> toUpdateMap() {
+    return <String, dynamic>{
+      'type': type,
+      'entry': entry,
+      'description': description,
+      'title': title,
+      'accountId': accountId,
+      'accountIdentification': accountIdentification,
+    };
+  }
+
   factory EntryModel.fromMap(Map<String, dynamic> map) {
     return EntryModel(
       uid: map['uid'] as String,
+      userId: map['userId'] as String,
       type: map['type'] as int,
       entry: map['entry'] as int,
       description: map['description'] as String,
@@ -77,7 +94,7 @@ class EntryModel {
 
   @override
   String toString() {
-    return 'EntryModel(uid: $uid, type: $type, entry: $entry, description: $description, title: $title, accountId: $accountId, accountIdentification: $accountIdentification, created: $created)';
+    return 'EntryModel(uid: $uid, userId: $userId, type: $type, entry: $entry, description: $description, title: $title, accountId: $accountId, accountIdentification: $accountIdentification, created: $created)';
   }
 
   @override
@@ -85,6 +102,7 @@ class EntryModel {
     if (identical(this, other)) return true;
 
     return other.uid == uid &&
+        other.userId == userId &&
         other.type == type &&
         other.entry == entry &&
         other.description == description &&
@@ -97,6 +115,7 @@ class EntryModel {
   @override
   int get hashCode {
     return uid.hashCode ^
+        userId.hashCode ^
         type.hashCode ^
         entry.hashCode ^
         description.hashCode ^

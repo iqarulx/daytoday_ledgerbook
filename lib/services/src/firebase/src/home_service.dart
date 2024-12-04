@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-import '../../../../constants/constants.dart';
+import '/constants/constants.dart';
 import '/model/model.dart';
 import '/services/services.dart';
 
@@ -12,7 +12,7 @@ class HomeService {
       List<DailyModel> list = [];
       var uid = await Db.getData(type: UserData.uid);
       var r = await firebase.expenses
-          .where('uid', isEqualTo: uid)
+          .where('userId', isEqualTo: uid)
           .orderBy('created', descending: true)
           .get();
 
@@ -23,13 +23,14 @@ class HomeService {
           var data = doc.data();
           var createdMillis = data['created'];
           var createdDate = DateTime.fromMillisecondsSinceEpoch(createdMillis);
-          String createdDateString =
-              DateFormat('yyyy-MM-dd').format(createdDate);
+          var df = await Db.getDateFormat();
+          String createdDateString = DateFormat(df).format(createdDate);
 
           EntryModel entry = EntryModel(
             accountId: data['accountId'],
             accountIdentification: data['accountIdentification'],
             uid: data["uid"],
+            userId: data["userId"],
             type: data["type"], // 1 = Credit, 2 = Debit
             entry: data["entry"],
             description: data["description"],
@@ -82,12 +83,13 @@ class HomeService {
       DateTime sevenDaysAgo = now.subtract(const Duration(days: 7));
 
       // Format dates for return
-      String fromDate = DateFormat('yyyy-MM-dd').format(sevenDaysAgo);
-      String toDate = DateFormat('yyyy-MM-dd').format(now);
+      var df = await Db.getDateFormat();
+      String fromDate = DateFormat(df).format(sevenDaysAgo);
+      String toDate = DateFormat(df).format(now);
 
       // Fetch expenses within the date range
       var r = await firebase.expenses
-          .where('uid', isEqualTo: uid)
+          .where('userId', isEqualTo: uid)
           .where('created',
               isGreaterThanOrEqualTo: sevenDaysAgo.millisecondsSinceEpoch)
           .where('created', isLessThanOrEqualTo: now.millisecondsSinceEpoch)
@@ -102,6 +104,7 @@ class HomeService {
             accountId: data['accountId'],
             accountIdentification: data['accountIdentification'],
             uid: data["uid"],
+            userId: data["userId"],
             type: data["type"], // 1 = Credit, 2 = Debit
             entry: data["entry"],
             description: data["description"],
@@ -146,44 +149,45 @@ class HomeService {
 
       // Calculate date range: today and 7 days ago
       DateTime now = DateTime.now();
-      DateTime sevenDaysAgo = now.subtract(const Duration(days: 30));
+      DateTime thirtyDaysAgo = now.subtract(const Duration(days: 30));
 
-      // Format dates for return
-      String fromDate = DateFormat('yyyy-MM-dd').format(sevenDaysAgo);
-      String toDate = DateFormat('yyyy-MM-dd').format(now);
+      var df = await Db.getDateFormat();
+      String fromDate = DateFormat(df).format(thirtyDaysAgo);
+      String toDate = DateFormat(df).format(now);
 
       // Fetch expenses within the date range
       var r = await firebase.expenses
-          .where('uid', isEqualTo: uid)
+          .where('userId', isEqualTo: uid)
           .where('created',
-              isGreaterThanOrEqualTo: sevenDaysAgo.millisecondsSinceEpoch)
+              isGreaterThanOrEqualTo: thirtyDaysAgo.millisecondsSinceEpoch)
           .where('created', isLessThanOrEqualTo: now.millisecondsSinceEpoch)
           .orderBy('created', descending: true)
           .get();
 
       if (r.docs.isNotEmpty) {
-        List<EntryModel> weeklyExpenses = [];
+        List<EntryModel> monthlyExpenses = [];
         for (var doc in r.docs) {
           var data = doc.data();
           EntryModel entry = EntryModel(
             accountId: data['accountId'],
             accountIdentification: data['accountIdentification'],
             uid: data["uid"],
+            userId: data["userId"],
             type: data["type"], // 1 = Credit, 2 = Debit
             entry: data["entry"],
             description: data["description"],
             title: data["title"],
             created: DateTime.fromMillisecondsSinceEpoch(data["created"]),
           );
-          weeklyExpenses.add(entry);
+          monthlyExpenses.add(entry);
         }
 
         // Calculate totals for the week
-        double totalCredit = weeklyExpenses
+        double totalCredit = monthlyExpenses
             .where((e) => e.type == 1) // Filter credit entries
             .fold(0.0, (sum, e) => sum + e.entry);
 
-        double totalDebit = weeklyExpenses
+        double totalDebit = monthlyExpenses
             .where((e) => e.type == 2) // Filter debit entries
             .fold(0.0, (sum, e) => sum + e.entry);
 
@@ -193,7 +197,7 @@ class HomeService {
         list.add(MonthlyModel(
           fromDate: fromDate,
           toDate: toDate,
-          expense: weeklyExpenses,
+          expense: monthlyExpenses,
           totalCredit: totalCredit.toStringAsFixed(2), // Convert to String
           totalDebit: totalDebit.toStringAsFixed(2), // Convert to String
           balance: balance.toStringAsFixed(2), // Convert to String
@@ -213,44 +217,45 @@ class HomeService {
 
       // Calculate date range: today and 7 days ago
       DateTime now = DateTime.now();
-      DateTime sevenDaysAgo = now.subtract(const Duration(days: 365));
+      DateTime yearAgo = now.subtract(const Duration(days: 365));
 
-      // Format dates for return
-      String fromDate = DateFormat('yyyy-MM-dd').format(sevenDaysAgo);
-      String toDate = DateFormat('yyyy-MM-dd').format(now);
+      var df = await Db.getDateFormat();
+      String fromDate = DateFormat(df).format(yearAgo);
+      String toDate = DateFormat(df).format(now);
 
       // Fetch expenses within the date range
       var r = await firebase.expenses
-          .where('uid', isEqualTo: uid)
+          .where('userId', isEqualTo: uid)
           .where('created',
-              isGreaterThanOrEqualTo: sevenDaysAgo.millisecondsSinceEpoch)
+              isGreaterThanOrEqualTo: yearAgo.millisecondsSinceEpoch)
           .where('created', isLessThanOrEqualTo: now.millisecondsSinceEpoch)
           .orderBy('created', descending: true)
           .get();
 
       if (r.docs.isNotEmpty) {
-        List<EntryModel> weeklyExpenses = [];
+        List<EntryModel> yearlyExpenses = [];
         for (var doc in r.docs) {
           var data = doc.data();
           EntryModel entry = EntryModel(
             accountId: data['accountId'],
             accountIdentification: data['accountIdentification'],
             uid: data["uid"],
+            userId: data["userId"],
             type: data["type"], // 1 = Credit, 2 = Debit
             entry: data["entry"],
             description: data["description"],
             title: data["title"],
             created: DateTime.fromMillisecondsSinceEpoch(data["created"]),
           );
-          weeklyExpenses.add(entry);
+          yearlyExpenses.add(entry);
         }
 
         // Calculate totals for the week
-        double totalCredit = weeklyExpenses
+        double totalCredit = yearlyExpenses
             .where((e) => e.type == 1) // Filter credit entries
             .fold(0.0, (sum, e) => sum + e.entry);
 
-        double totalDebit = weeklyExpenses
+        double totalDebit = yearlyExpenses
             .where((e) => e.type == 2) // Filter debit entries
             .fold(0.0, (sum, e) => sum + e.entry);
 
@@ -260,7 +265,7 @@ class HomeService {
         list.add(YearlyModel(
           fromDate: fromDate,
           toDate: toDate,
-          expense: weeklyExpenses,
+          expense: yearlyExpenses,
           totalCredit: totalCredit.toStringAsFixed(2), // Convert to String
           totalDebit: totalDebit.toStringAsFixed(2), // Convert to String
           balance: balance.toStringAsFixed(2), // Convert to String
@@ -289,8 +294,8 @@ class HomeService {
           var data = doc.data();
           var createdMillis = data['created'];
           var createdDate = DateTime.fromMillisecondsSinceEpoch(createdMillis);
-          String createdDateString =
-              DateFormat('yyyy-MM-dd').format(createdDate);
+          var df = await Db.getDateFormat();
+          String createdDateString = DateFormat(df).format(createdDate);
 
           NotesModel entry = NotesModel(
             userId: data['userId'],

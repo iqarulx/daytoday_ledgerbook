@@ -11,6 +11,14 @@ class ScreensFunctions {
     }
   }
 
+  static Future<List<Map<String, dynamic>>> getCurrency() async {
+    try {
+      return await ScreenService.getCurrency();
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
   static Future updateProfile(UserModel model) async {
     try {
       await ScreenService.updateProfile(model);
@@ -28,9 +36,41 @@ class ScreensFunctions {
     }
   }
 
+  static Future editEntry(EntryModel model) async {
+    try {
+      return await ScreenService.editEntry(model);
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  static Future deleteEntry(EntryModel model) async {
+    try {
+      return await ScreenService.deleteEntry(model);
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
   static Future createNotes(NotesModel model) async {
     try {
       return await ScreenService.createNotes(model);
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  static Future editNotes(NotesModel model) async {
+    try {
+      return await ScreenService.editNotes(model);
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  static Future deleteNotes(NotesModel model) async {
+    try {
+      return await ScreenService.deleteNotes(model);
     } catch (e) {
       throw e.toString();
     }

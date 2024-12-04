@@ -1,8 +1,11 @@
+import 'package:daytoday_ledgerbook/model/model.dart';
+import 'package:daytoday_ledgerbook/utils/src/sheet.dart';
+import 'package:daytoday_ledgerbook/view/src/entry/entry.dart';
 import 'package:flutter/material.dart';
 
 import '/services/services.dart';
 
-TableRow dailyHead(
+TableRow eTableHead(
     BuildContext context, String account, String leftData, String rightData) {
   return TableRow(
     children: [
@@ -61,69 +64,102 @@ TableRow dailyHead(
   );
 }
 
-TableRow dailyBody(
-    BuildContext context, String account, String leftData, String rightData) {
+TableRow eTableBody(BuildContext context, String account, String leftData,
+    String rightData, EntryModel query, void Function() func) {
   return TableRow(
     children: [
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: account.isNotEmpty
-            ? Text(
-                account,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.blackColor,
-                    ),
-              )
-            : Text(
-                "-",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.blackColor,
-                    ),
-              ),
+      GestureDetector(
+        onTap: () async {
+          var v = await Sheet.showSheet(context,
+              size: 0.9, widget: EditEntry(query: query));
+          if (v != null) {
+            if (v) {
+              func();
+            }
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: account.isNotEmpty
+              ? Text(
+                  account,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.blackColor,
+                      ),
+                )
+              : Text(
+                  "-",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.blackColor,
+                      ),
+                ),
+        ),
       ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: leftData.isNotEmpty
-            ? Text(
-                leftData,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.greenColor,
-                    ),
-              )
-            : Text(
-                "-",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.greenColor,
-                    ),
-              ),
+      GestureDetector(
+        onTap: () async {
+          var v = await Sheet.showSheet(context,
+              size: 0.9, widget: EditEntry(query: query));
+          if (v != null) {
+            if (v) {
+              func();
+            }
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: leftData.isNotEmpty
+              ? Text(
+                  leftData,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.greenColor,
+                      ),
+                )
+              : Text(
+                  "-",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.greenColor,
+                      ),
+                ),
+        ),
       ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: rightData.isNotEmpty
-            ? Text(
-                rightData,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.redColor,
-                    ),
-              )
-            : Text(
-                "-",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.redColor,
-                    ),
-              ),
+      GestureDetector(
+        onTap: () async {
+          var v = await Sheet.showSheet(context,
+              size: 0.9, widget: EditEntry(query: query));
+          if (v != null) {
+            if (v) {
+              func();
+            }
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: rightData.isNotEmpty
+              ? Text(
+                  rightData,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.redColor,
+                      ),
+                )
+              : Text(
+                  "-",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.redColor,
+                      ),
+                ),
+        ),
       ),
     ],
   );
 }
 
-TableRow dailyFooter(BuildContext context, String leftData, String rightData) {
+TableRow eTableFooter(BuildContext context, String leftData, String rightData) {
   return TableRow(
     children: [
       Padding(

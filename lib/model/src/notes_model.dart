@@ -41,6 +41,13 @@ class NotesModel {
     };
   }
 
+  Map<String, dynamic> toUpdateMap() {
+    return <String, dynamic>{
+      'date': date.millisecondsSinceEpoch,
+      'notes': notes,
+    };
+  }
+
   factory NotesModel.fromMap(Map<String, dynamic> map) {
     return NotesModel(
       uid: map['uid'] != null ? map['uid'] as String : null,

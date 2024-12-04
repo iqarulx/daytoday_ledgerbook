@@ -9,7 +9,6 @@ import 'services/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   NotificationService.notification.initialize(
     const InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
@@ -23,7 +22,6 @@ void main() async {
   );
   await NotificationService.requestPermissions();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   runApp(const App());
 }

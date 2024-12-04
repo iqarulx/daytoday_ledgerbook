@@ -27,6 +27,8 @@ class Db {
     cn.setString('uid', model.uid);
     cn.setString('profileImage', model.profileImage);
     cn.setString('profileName', model.profileName);
+    cn.setString('currency', model.currency);
+    cn.setString('dateFormat', model.dateFormat);
     cn.setBool('login', true);
     cn.setString('theme', 'light');
   }
@@ -39,8 +41,17 @@ class Db {
       return cn.getString('uid');
     } else if (type == UserData.profileImage) {
       return cn.getString('profileImage');
+    } else if (type == UserData.dateFormat) {
+      return cn.getString('dateFormat');
+    } else if (type == UserData.currency) {
+      return cn.getString('currency');
     }
     return null;
+  }
+
+  static Future<String> getDateFormat() async {
+    var cn = await connect();
+    return cn.getString('dateFormat') ?? 'yyyy-MM-dd';
   }
 
   static Future updateData(
@@ -50,6 +61,10 @@ class Db {
       return cn.setString('profileName', value);
     } else if (type == UserData.profileImage) {
       return cn.setString('profileImage', value);
+    } else if (type == UserData.currency) {
+      return cn.setString('currency', value);
+    } else if (type == UserData.dateFormat) {
+      return cn.setString('dateFormat', value);
     }
     return null;
   }

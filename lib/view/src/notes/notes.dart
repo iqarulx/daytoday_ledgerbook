@@ -1,6 +1,7 @@
 import 'package:daytoday_ledgerbook/services/services.dart';
 import 'package:daytoday_ledgerbook/ui/ui.dart';
 import 'package:daytoday_ledgerbook/utils/utils.dart';
+import 'package:daytoday_ledgerbook/view/src/entry/entry.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -94,26 +95,38 @@ class _NotesState extends State<Notes> {
                   ),
                   const Divider(),
                   ...i.notesList.map((j) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          DateFormat('hh:mm a').format(j.date),
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          j.notes,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
-                        const Divider(),
-                      ],
+                    return GestureDetector(
+                      onTap: () async {
+                        var v = await Sheet.showSheet(context,
+                            size: 0.9, widget: EditNotes(query: j));
+                        if (v != null) {
+                          if (v) {
+                            _notesHandler = _init();
+                            setState(() {});
+                          }
+                        }
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            DateFormat('hh:mm a').format(j.date),
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            j.notes,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                          ),
+                          const Divider(),
+                        ],
+                      ),
                     );
                   }),
                 ],

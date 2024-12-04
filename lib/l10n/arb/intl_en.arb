@@ -16,5 +16,17 @@
     "downloads" : "Downloads",
     "settings" : "Settings",
     "logout" : "Logout",
-    "total" : "Total"
+    "total" : "Total",
+    "daily" : "Daily",
+    "weekly" : "Weekly",
+    "monthly" : "Monthly",
+    "yearly" : "Yearly",
+    "balance" : "Balance",
+    "expenseList" : "Expenses List",
+    "printError" : "No data found to print",
+    "excelError" : "No data found generate excel",
+    "deleteDownloads" : "Delete Downloads",
+    "deleteDownloadsTitle" : "Delete",
+    "deleteDownloadsSubtitle" : "Are you sure want to delete downloads",
+    "deleteDownloadsSuccessMsg" : "Downloads Deleted",
 }

@@ -1,15 +1,14 @@
-import 'package:daytoday_ledgerbook/constants/src/strings.dart';
-import 'package:daytoday_ledgerbook/model/model.dart';
-import 'package:daytoday_ledgerbook/model/src/account_edit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../functions/functions.dart';
-import '../../../../services/services.dart';
-import '../../../../ui/ui.dart';
-import '../../../../utils/utils.dart';
+import '/functions/functions.dart';
+import '/services/services.dart';
+import '/ui/ui.dart';
+import '/utils/utils.dart';
+import '/constants/constants.dart';
+import '/model/model.dart';
 
 class EditProfile extends StatefulWidget {
   final Map<String, dynamic> data;
@@ -25,6 +24,8 @@ class _EditProfileState extends State<EditProfile> {
   final TextEditingController _profileName = TextEditingController();
   final TextEditingController _purpose = TextEditingController();
   final TextEditingController _additionalInfo = TextEditingController();
+  final TextEditingController currency = TextEditingController();
+  final TextEditingController dateFormat = TextEditingController();
 
   final List<AccountEditModel> _accList = [];
   late Future _editHanlder;
@@ -37,8 +38,21 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   void initState() {
+    currency.addListener(() {
+      setState(() {});
+    });
+    dateFormat.addListener(() {
+      setState(() {});
+    });
     _editHanlder = _init();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    currency.dispose();
+    dateFormat.dispose();
+    super.dispose();
   }
 
   _init() async {
@@ -46,6 +60,8 @@ class _EditProfileState extends State<EditProfile> {
     _purpose.text = widget.data["purpose"];
     _additionalInfo.text = widget.data["additionalInfo"];
     _selectedProfileImage = widget.data["profileImage"];
+    currency.text = widget.data["currency"];
+    dateFormat.text = widget.data["dateFormat"];
     for (var i in widget.data["accountList"]) {
       _colors.add(Color(int.parse(i["accountColor"].toString())));
 
@@ -185,6 +201,78 @@ class _EditProfileState extends State<EditProfile> {
                     label: "Additional Info",
                     hintText: "Additional Info",
                     maxLines: 3,
+                  ),
+                  const SizedBox(height: 10),
+                  FormFields(
+                    suffixIcon: currency.text.isEmpty
+                        ? const Icon(Icons.arrow_drop_down_rounded)
+                        : IconButton(
+                            tooltip: "Clear",
+                            onPressed: () {
+                              currency.clear();
+                              setState(() {});
+                            },
+                            icon: Icon(
+                              Iconsax.close_circle,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                    controller: currency,
+                    label: "Currency",
+                    hintText: "Select",
+                    onTap: () async {
+                      var value = await Sheet.showSheet(context,
+                          size: 0.9, widget: const CurrencyList());
+                      if (value != null) {
+                        currency.text = value;
+                        setState(() {});
+                      }
+                    },
+                    readOnly: true,
+                    // valid: (input) {
+                    //   if (input != null) {
+                    //     if (input.isEmpty) {
+                    //       return 'Select site';
+                    //     }
+                    //   }
+                    //   return null;
+                    // },
+                  ),
+                  const SizedBox(height: 10),
+                  FormFields(
+                    suffixIcon: dateFormat.text.isEmpty
+                        ? const Icon(Icons.arrow_drop_down_rounded)
+                        : IconButton(
+                            tooltip: "Clear",
+                            onPressed: () {
+                              dateFormat.clear();
+                              setState(() {});
+                            },
+                            icon: Icon(
+                              Iconsax.close_circle,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                    controller: dateFormat,
+                    label: "Date Format",
+                    hintText: "Select",
+                    onTap: () async {
+                      var value = await Sheet.showSheet(context,
+                          size: 0.9, widget: const DateFormatList());
+                      if (value != null) {
+                        dateFormat.text = value;
+                        setState(() {});
+                      }
+                    },
+                    readOnly: true,
+                    // valid: (input) {
+                    //   if (input != null) {
+                    //     if (input.isEmpty) {
+                    //       return 'Select site';
+                    //     }
+                    //   }
+                    //   return null;
+                    // },
                   ),
                   const SizedBox(height: 10),
                   Text(
@@ -347,10 +435,15 @@ class _EditProfileState extends State<EditProfile> {
         );
       }
 
+      await Db.updateData(type: UserData.currency, value: currency.text);
+      await Db.updateData(type: UserData.dateFormat, value: dateFormat.text);
+
       var userModel = UserModel(
         uid: "",
         username: "",
         password: "",
+        currency: currency.text,
+        dateFormat: dateFormat.text,
         additionalInfo: _additionalInfo.text,
         profileName: _profileName.text,
         purpose: _purpose.text,

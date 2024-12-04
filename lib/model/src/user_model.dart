@@ -13,6 +13,8 @@ class UserModel {
   String additionalInfo;
   String username;
   String password;
+  String currency;
+  String dateFormat;
   List<AccountModel> accountList;
 
   UserModel({
@@ -23,6 +25,8 @@ class UserModel {
     required this.additionalInfo,
     required this.username,
     required this.password,
+    required this.currency,
+    required this.dateFormat,
     required this.accountList,
   });
 
@@ -34,6 +38,8 @@ class UserModel {
     String? additionalInfo,
     String? username,
     String? password,
+    String? currency,
+    String? dateFormat,
     List<AccountModel>? accountList,
   }) {
     return UserModel(
@@ -44,6 +50,8 @@ class UserModel {
       additionalInfo: additionalInfo ?? this.additionalInfo,
       username: username ?? this.username,
       password: password ?? this.password,
+      currency: currency ?? this.currency,
+      dateFormat: dateFormat ?? this.dateFormat,
       accountList: accountList ?? this.accountList,
     );
   }
@@ -57,6 +65,8 @@ class UserModel {
       'additionalInfo': additionalInfo,
       'username': username,
       'password': password,
+      'currency': currency,
+      'dateFormat': dateFormat,
       'accountList': accountList.map((x) => x.toMap()).toList(),
     };
   }
@@ -67,6 +77,8 @@ class UserModel {
       'profileName': profileName,
       'purpose': purpose,
       'additionalInfo': additionalInfo,
+      'currency': currency,
+      'dateFormat': dateFormat,
       'accountList': accountList.map((x) => x.toMap()).toList(),
     };
   }
@@ -80,6 +92,8 @@ class UserModel {
       additionalInfo: map['additionalInfo'] as String,
       username: map['username'] as String,
       password: map['password'] as String,
+      currency: map['currency'] as String,
+      dateFormat: map['dateFormat'] as String,
       accountList: List<AccountModel>.from(
         (map['accountList'] as List<int>).map<AccountModel>(
           (x) => AccountModel.fromMap(x as Map<String, dynamic>),
@@ -95,7 +109,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(uid: $uid, profileImage: $profileImage, profileName: $profileName, purpose: $purpose, additionalInfo: $additionalInfo, username: $username, password: $password, accountList: $accountList)';
+    return 'UserModel(uid: $uid, profileImage: $profileImage, profileName: $profileName, purpose: $purpose, additionalInfo: $additionalInfo, username: $username, password: $password, currency: $currency, dateFormat: $dateFormat, accountList: $accountList)';
   }
 
   @override
@@ -109,6 +123,8 @@ class UserModel {
         other.additionalInfo == additionalInfo &&
         other.username == username &&
         other.password == password &&
+        other.currency == currency &&
+        other.dateFormat == dateFormat &&
         listEquals(other.accountList, accountList);
   }
 
@@ -121,6 +137,8 @@ class UserModel {
         additionalInfo.hashCode ^
         username.hashCode ^
         password.hashCode ^
+        currency.hashCode ^
+        dateFormat.hashCode ^
         accountList.hashCode;
   }
 }

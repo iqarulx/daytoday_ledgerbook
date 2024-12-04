@@ -28,6 +28,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   List<WeeklyModel> _weeklyList = [];
   List<MonthlyModel> _monthlyList = [];
   List<YearlyModel> _yearlyList = [];
+  String _currency = "";
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -38,7 +39,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     _weeklyHandler = _getWeekly();
     _monthlyHandler = _getMonthly();
     _yearlyHandler = _getYearly();
+    _getCurrency();
     super.initState();
+  }
+
+  _getCurrency() async {
+    _currency = await Db.getData(type: UserData.currency) ?? '';
+    setState(() {});
   }
 
   _getDaily() async {
@@ -216,7 +223,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              i.balance,
+                              "$_currency ${i.balance}",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
@@ -232,15 +239,29 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     const Divider(),
                     Table(
                       children: [
-                        dailyHead(context, "Account", "Credit", "Debit"),
+                        eTableHead(context, "Account", "Credit", "Debit"),
                         ...i.expense.map((j) {
-                          return dailyBody(
-                              context,
-                              j.accountIdentification,
-                              j.type == 1 ? j.entry.toString() : '',
-                              j.type == 2 ? j.entry.toString() : '');
+                          return eTableBody(
+                            context,
+                            j.accountIdentification,
+                            j.type == 1
+                                ? "$_currency ${j.entry.toString()}"
+                                : '',
+                            j.type == 2
+                                ? "$_currency ${j.entry.toString()}"
+                                : '',
+                            j,
+                            () {
+                              _dailyHandler = _getDaily();
+                              _weeklyHandler = _getWeekly();
+                              _monthlyHandler = _getMonthly();
+                              _yearlyHandler = _getYearly();
+                              setState(() {});
+                            },
+                          );
                         }),
-                        dailyFooter(context, i.totalCredit, i.totalDebit)
+                        eTableFooter(context, "$_currency ${i.totalCredit}",
+                            "$_currency ${i.totalDebit}")
                       ],
                     )
                   ],
@@ -294,7 +315,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              i.balance,
+                              "$_currency ${i.balance}",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
@@ -310,15 +331,29 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     const Divider(),
                     Table(
                       children: [
-                        dailyHead(context, "Account", "Credit", "Debit"),
+                        eTableHead(context, "Account", "Credit", "Debit"),
                         ...i.expense.map((j) {
-                          return dailyBody(
-                              context,
-                              j.accountIdentification,
-                              j.type == 1 ? j.entry.toString() : '',
-                              j.type == 2 ? j.entry.toString() : '');
+                          return eTableBody(
+                            context,
+                            j.accountIdentification,
+                            j.type == 1
+                                ? "$_currency ${j.entry.toString()}"
+                                : '',
+                            j.type == 2
+                                ? "$_currency ${j.entry.toString()}"
+                                : '',
+                            j,
+                            () {
+                              _dailyHandler = _getDaily();
+                              _weeklyHandler = _getWeekly();
+                              _monthlyHandler = _getMonthly();
+                              _yearlyHandler = _getYearly();
+                              setState(() {});
+                            },
+                          );
                         }),
-                        dailyFooter(context, i.totalCredit, i.totalDebit)
+                        eTableFooter(context, "$_currency ${i.totalCredit}",
+                            "$_currency ${i.totalDebit}")
                       ],
                     )
                   ],
@@ -372,7 +407,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              i.balance,
+                              "$_currency ${i.balance}",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
@@ -388,15 +423,29 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     const Divider(),
                     Table(
                       children: [
-                        dailyHead(context, "Account", "Credit", "Debit"),
+                        eTableHead(context, "Account", "Credit", "Debit"),
                         ...i.expense.map((j) {
-                          return dailyBody(
-                              context,
-                              j.accountIdentification,
-                              j.type == 1 ? j.entry.toString() : '',
-                              j.type == 2 ? j.entry.toString() : '');
+                          return eTableBody(
+                            context,
+                            j.accountIdentification,
+                            j.type == 1
+                                ? "$_currency ${j.entry.toString()}"
+                                : '',
+                            j.type == 2
+                                ? "$_currency ${j.entry.toString()}"
+                                : '',
+                            j,
+                            () {
+                              _dailyHandler = _getDaily();
+                              _weeklyHandler = _getWeekly();
+                              _monthlyHandler = _getMonthly();
+                              _yearlyHandler = _getYearly();
+                              setState(() {});
+                            },
+                          );
                         }),
-                        dailyFooter(context, i.totalCredit, i.totalDebit)
+                        eTableFooter(context, "$_currency ${i.totalCredit}",
+                            "$_currency ${i.totalDebit}")
                       ],
                     )
                   ],
@@ -450,7 +499,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              i.balance,
+                              "$_currency ${i.balance}",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
@@ -466,15 +515,29 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     const Divider(),
                     Table(
                       children: [
-                        dailyHead(context, "Account", "Credit", "Debit"),
+                        eTableHead(context, "Account", "Credit", "Debit"),
                         ...i.expense.map((j) {
-                          return dailyBody(
-                              context,
-                              j.accountIdentification,
-                              j.type == 1 ? j.entry.toString() : '',
-                              j.type == 2 ? j.entry.toString() : '');
+                          return eTableBody(
+                            context,
+                            j.accountIdentification,
+                            j.type == 1
+                                ? "$_currency ${j.entry.toString()}"
+                                : '',
+                            j.type == 2
+                                ? "$_currency ${j.entry.toString()}"
+                                : '',
+                            j,
+                            () {
+                              _dailyHandler = _getDaily();
+                              _weeklyHandler = _getWeekly();
+                              _monthlyHandler = _getMonthly();
+                              _yearlyHandler = _getYearly();
+                              setState(() {});
+                            },
+                          );
                         }),
-                        dailyFooter(context, i.totalCredit, i.totalDebit)
+                        eTableFooter(context, "$_currency ${i.totalCredit}",
+                            "$_currency ${i.totalDebit}")
                       ],
                     )
                   ],
