@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
 import '../../../../constants/constants.dart';
 import '/functions/functions.dart';
 import '/model/model.dart';
@@ -21,7 +22,16 @@ class _EntryState extends State<Entry> {
   String? accountId;
   TextEditingController title = TextEditingController();
   TextEditingController description = TextEditingController();
+  TextEditingController createdDate = TextEditingController();
+  DateTime? _selectedDate;
   var formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    createdDate.text = DateFormat('yyyy-MM-dd hh:mm a').format(DateTime.now());
+    _selectedDate = DateTime.now();
+    super.initState();
+  }
 
   _createEntry() async {
     try {
@@ -36,7 +46,7 @@ class _EntryState extends State<Entry> {
         accountIdentification: accountName.text,
         description: description.text,
         title: title.text,
-        created: DateTime.now(),
+        created: _selectedDate ?? DateTime.now(),
       );
 
       await ScreensFunctions.createEntry(model);
@@ -47,6 +57,16 @@ class _EntryState extends State<Entry> {
     } catch (e) {
       Navigator.pop(context);
       Snackbar.showSnackBar(context, content: e.toString(), isSuccess: false);
+    }
+  }
+
+  _createdDatePicker() async {
+    final DateTime? picked = await dateTimePicker(context);
+    if (picked != null) {
+      setState(() {
+        createdDate.text = DateFormat('yyyy-MM-dd hh:mm a').format(picked);
+        _selectedDate = picked;
+      });
     }
   }
 
@@ -138,6 +158,25 @@ class _EntryState extends State<Entry> {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(height: 10),
+                FormFields(
+                  controller: createdDate,
+                  label: "Date",
+                  hintText: "Date",
+                  readOnly: true,
+                  onTap: () {
+                    _createdDatePicker();
+                  },
+                  suffixIcon: const Icon(Iconsax.calendar),
+                  valid: (input) {
+                    if (input != null) {
+                      if (input.isEmpty) {
+                        return 'Enter date';
+                      }
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 10),
                 FormFields(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
 import '/functions/functions.dart';
 import '/model/model.dart';
 import '/services/services.dart';
@@ -22,6 +23,14 @@ class _EditEntryState extends State<EditEntry> {
   TextEditingController title = TextEditingController();
   TextEditingController description = TextEditingController();
   var formKey = GlobalKey<FormState>();
+  TextEditingController createdDate = TextEditingController();
+  DateTime? _selectedDate;
+
+  @override
+  void initState() {
+    _init();
+    super.initState();
+  }
 
   _editEntry() async {
     try {
@@ -35,7 +44,7 @@ class _EditEntryState extends State<EditEntry> {
         accountIdentification: accountName.text,
         description: description.text,
         title: title.text,
-        created: DateTime.now(),
+        created: _selectedDate ?? DateTime.now(),
       );
 
       await ScreensFunctions.editEntry(model);
@@ -89,10 +98,14 @@ class _EditEntryState extends State<EditEntry> {
     }
   }
 
-  @override
-  void initState() {
-    _init();
-    super.initState();
+  _createdDatePicker() async {
+    final DateTime? picked = await dateTimePicker(context);
+    if (picked != null) {
+      setState(() {
+        createdDate.text = DateFormat('yyyy-MM-dd hh:mm a').format(picked);
+        _selectedDate = picked;
+      });
+    }
   }
 
   _init() {
@@ -102,6 +115,9 @@ class _EditEntryState extends State<EditEntry> {
     accountId = widget.query.accountId;
     title.text = widget.query.title;
     description.text = widget.query.description;
+    createdDate.text =
+        DateFormat('yyyy-MM-dd hh:mm a').format(widget.query.created);
+    _selectedDate = widget.query.created;
   }
 
   @override
@@ -204,6 +220,25 @@ class _EditEntryState extends State<EditEntry> {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(height: 10),
+                FormFields(
+                  controller: createdDate,
+                  label: "Date",
+                  hintText: "Date",
+                  readOnly: true,
+                  onTap: () {
+                    _createdDatePicker();
+                  },
+                  suffixIcon: const Icon(Iconsax.calendar),
+                  valid: (input) {
+                    if (input != null) {
+                      if (input.isEmpty) {
+                        return 'Enter date';
+                      }
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 10),
                 FormFields(

@@ -10,6 +10,14 @@ class AuthFunctions {
     }
   }
 
+  static Future<bool> checkUserName(String name) async {
+    try {
+      return await AuthService.checkUserName(name);
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
   static Future<UserModel> checkLogin(String username, String password) async {
     try {
       var d = await AuthService.checkLogin(username, password);

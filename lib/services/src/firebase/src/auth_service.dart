@@ -89,4 +89,17 @@ class AuthService {
       throw e.toString();
     }
   }
+
+  static Future<bool> checkUserName(String name) async {
+    try {
+      var r = await firebase.users.where('username', isEqualTo: name).get();
+      if (r.docs.isEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw e.toString();
+    }
+  }
 }

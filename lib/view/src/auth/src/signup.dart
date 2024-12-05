@@ -36,6 +36,15 @@ class _SignupState extends State<Signup> {
     super.initState();
   }
 
+  Future<bool> _checkUserName() async {
+    var r = await AuthFunctions.checkUserName(_userName.text);
+    if (r) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -267,21 +276,29 @@ class _SignupState extends State<Signup> {
 
   _saveProfile() async {
     if (formKey.currentState!.validate()) {
-      if (_profileImageUrl != null) {
-        Navigator.push(context, CupertinoPageRoute(builder: (context) {
-          return AccountInfo(
-            username: _userName.text,
-            password: _password.text,
-            purpose: _purpose.text,
-            profileName: _profileName.text,
-            profileImageUrl: _profileImageUrl ?? '',
-            additionalInfo: _additionalInfo.text,
-          );
-        }));
+      futureLoading(context);
+      var usernameAvailable = await _checkUserName();
+      Navigator.pop(context);
+      if (usernameAvailable) {
+        if (_profileImageUrl != null) {
+          Navigator.push(context, CupertinoPageRoute(builder: (context) {
+            return AccountInfo(
+              username: _userName.text,
+              password: _password.text,
+              purpose: _purpose.text,
+              profileName: _profileName.text,
+              profileImageUrl: _profileImageUrl ?? '',
+              additionalInfo: _additionalInfo.text,
+            );
+          }));
+        } else {
+          Snackbar.showSnackBar(context,
+              content: "Please select profile image to countinue",
+              isSuccess: false);
+        }
       } else {
         Snackbar.showSnackBar(context,
-            content: "Please select profile image to countinue",
-            isSuccess: false);
+            content: "Username not available. Try another", isSuccess: false);
       }
     }
   }

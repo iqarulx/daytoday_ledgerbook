@@ -70,6 +70,7 @@ class EntryModel {
       'title': title,
       'accountId': accountId,
       'accountIdentification': accountIdentification,
+      'created': created.millisecondsSinceEpoch,
     };
   }
 
