@@ -1,6 +1,8 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
-import '../../services/services.dart';
+// Project imports:
+import '/services/services.dart';
 
 TableRow tableData(
     BuildContext context, String leftData, String rightData, Widget? icon) {

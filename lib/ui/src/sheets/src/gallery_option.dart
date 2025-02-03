@@ -1,4 +1,10 @@
+// Dart imports:
+import 'dart:io';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:iconsax/iconsax.dart';
 
 class GalleryOption extends StatefulWidget {
@@ -22,16 +28,17 @@ class _GalleryOptionState extends State<GalleryOption> {
           primary: false,
           shrinkWrap: true,
           children: [
-            ListTile(
-              onTap: () {
-                Navigator.pop(context, 1);
-              },
-              title: const Text(
-                "Camera",
-                style: TextStyle(color: Colors.black),
+            if (Platform.isWindows)
+              ListTile(
+                onTap: () {
+                  Navigator.pop(context, 1);
+                },
+                title: const Text(
+                  "Camera",
+                  style: TextStyle(color: Colors.black),
+                ),
+                leading: const Icon(Iconsax.camera),
               ),
-              leading: const Icon(Iconsax.camera),
-            ),
             ListTile(
               onTap: () {
                 Navigator.pop(context, 2);

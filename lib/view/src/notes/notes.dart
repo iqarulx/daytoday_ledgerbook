@@ -1,11 +1,15 @@
-import 'package:daytoday_ledgerbook/services/services.dart';
-import 'package:daytoday_ledgerbook/ui/ui.dart';
-import 'package:daytoday_ledgerbook/utils/utils.dart';
-import 'package:daytoday_ledgerbook/view/src/entry/entry.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
 
-import '../../../model/model.dart';
+// Project imports:
+import '/model/model.dart';
+import '/services/services.dart';
+import '/ui/ui.dart';
+import '/utils/utils.dart';
+import '/view/view.dart';
 
 class Notes extends StatefulWidget {
   const Notes({super.key});

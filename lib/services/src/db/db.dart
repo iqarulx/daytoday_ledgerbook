@@ -1,6 +1,8 @@
+// Package imports:
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../constants/constants.dart';
+// Project imports:
+import '/constants/constants.dart';
 import '/model/model.dart';
 
 class Db {

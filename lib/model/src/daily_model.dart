@@ -1,9 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
+// Dart imports:
 import 'dart:convert';
 
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 
-import 'package:daytoday_ledgerbook/model/src/entry_model.dart';
+// Project imports:
+import '/model/model.dart';
 
 class DailyModel {
   String date;

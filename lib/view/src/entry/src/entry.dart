@@ -1,7 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
-import '../../../../constants/constants.dart';
+
+// Project imports:
+import '/constants/constants.dart';
 import '/functions/functions.dart';
 import '/model/model.dart';
 import '/services/services.dart';

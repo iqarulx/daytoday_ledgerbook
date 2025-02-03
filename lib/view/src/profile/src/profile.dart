@@ -1,13 +1,17 @@
-import 'package:daytoday_ledgerbook/constants/src/strings.dart';
-import 'package:daytoday_ledgerbook/view/src/profile/src/edit_profile.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../functions/functions.dart';
-import '../../../../model/model.dart';
-import '../../../../ui/ui.dart';
-import '../../../../utils/utils.dart';
+// Project imports:
+import '/constants/constants.dart';
+import '/functions/functions.dart';
+import '/model/model.dart';
+import '/ui/ui.dart';
+import '/utils/utils.dart';
+import '/view/view.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

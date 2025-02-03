@@ -1,13 +1,18 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:open_app_settings/open_app_settings.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// Project imports:
 import '/app/app.dart';
 import '/services/services.dart';
 import '/ui/ui.dart';
@@ -79,36 +84,37 @@ class _SettingsState extends State<Settings> {
       body: ListView(
         padding: const EdgeInsets.all(5),
         children: [
-          ListTile(
-            onTap: () {},
-            leading: CircleAvatar(
-              backgroundColor: Theme.of(context).primaryColor,
-              child: SvgPicture.asset(
-                SvgAssets.bellRing,
-                height: 20,
-                width: 20,
+          if (!Platform.isWindows)
+            ListTile(
+              onTap: () {},
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor,
+                child: SvgPicture.asset(
+                  SvgAssets.bellRing,
+                  height: 20,
+                  width: 20,
+                ),
+              ),
+              title: const Text(
+                "Notification",
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: Text(
+                "Push notifications while downloading file",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              trailing: Transform.scale(
+                scale: 0.8,
+                child: CupertinoSwitch(
+                  activeColor: Theme.of(context).primaryColor,
+                  onChanged: (value) {
+                    _changeNotSetting(value);
+                  },
+                  value: _notEnabled,
+                ),
               ),
             ),
-            title: const Text(
-              "Notification",
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: Text(
-              "Push notifications while downloading file",
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            trailing: Transform.scale(
-              scale: 0.8,
-              child: CupertinoSwitch(
-                activeColor: Theme.of(context).primaryColor,
-                onChanged: (value) {
-                  _changeNotSetting(value);
-                },
-                value: _notEnabled,
-              ),
-            ),
-          ),
-          Divider(color: Colors.grey.shade300),
+          if (!Platform.isWindows) Divider(color: Colors.grey.shade300),
           ListTile(
             onTap: () async {
               var r = await AppCache.clearCache();
@@ -250,23 +256,38 @@ class _SettingsState extends State<Settings> {
               style: Theme.of(context).textTheme.bodySmall,
             ),
             trailing: IconButton(
-              tooltip: "Open file",
+              tooltip: "Open Url",
               icon: Platform.isAndroid
                   ? SvgPicture.asset(
                       SvgAssets.playStore,
                       height: 25,
                       width: 25,
                     )
-                  : SvgPicture.asset(
-                      SvgAssets.appStore,
-                      height: 25,
-                      width: 25,
-                    ),
+                  : Platform.isIOS
+                      ? SvgPicture.asset(
+                          SvgAssets.appStore,
+                          height: 25,
+                          width: 25,
+                        )
+                      : const Icon(
+                          Icons.window_rounded,
+                          color: Color(0xff818589),
+                        ),
               onPressed: () async {
                 if (Platform.isAndroid) {
-                  var url = "";
+                  var url =
+                      "https://play.google.com/store/apps/details?id=com.srisoftwarez.daytoday_ledgerbook";
                   await launchUrl(Uri.parse(url));
-                } else if (Platform.isIOS) {}
+                } else if (Platform.isIOS) {
+                  var url =
+                      "https://apps.apple.com/us/app/daybook-ledgerbook/id6738385180";
+                  await launchUrl(Uri.parse(url));
+                } else if (Platform.isWindows) {
+                  Snackbar.showSnackBar(context,
+                      content:
+                          "Windows url updated when app is published on Microsoft Store",
+                      isSuccess: true);
+                }
               },
             ),
           ),

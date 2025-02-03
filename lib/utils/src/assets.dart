@@ -3,6 +3,7 @@ class ImageAssets {
   static const String loginBackground = 'assets/images/login_back.png';
   static const String logoTrans = 'assets/images/logo_trans.png';
   static const String avatar = 'assets/images/avatar.png';
+  static const String trademark = 'assets/images/trademark.png';
 }
 
 class SvgAssets {

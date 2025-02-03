@@ -1,14 +1,18 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uuid/uuid.dart';
 
-import '/utils/utils.dart';
+// Project imports:
 import '/functions/functions.dart';
 import '/model/model.dart';
 import '/services/services.dart';
 import '/ui/ui.dart';
+import '/utils/utils.dart';
 import '/view/view.dart';
 
 class AccountInfo extends StatefulWidget {

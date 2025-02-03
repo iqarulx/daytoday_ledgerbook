@@ -1,9 +1,16 @@
+// Dart imports:
 import 'dart:io';
 import 'dart:typed_data';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:http/http.dart' as http;
-import 'open_file.dart' as helper;
+
+// Project imports:
 import '/ui/ui.dart';
+import 'open_file.dart' as helper;
 
 class FileUtils {
   static const int maxFileSize = 2 * 1024 * 1024;

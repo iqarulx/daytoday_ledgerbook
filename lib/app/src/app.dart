@@ -1,7 +1,12 @@
-import 'package:daytoday_ledgerbook/services/services.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:provider/provider.dart';
-import 'app_utils.dart';
+
+// Project imports:
+import '/app/app.dart';
+import '/services/services.dart';
 import '/ui/ui.dart';
 
 class App extends StatelessWidget {

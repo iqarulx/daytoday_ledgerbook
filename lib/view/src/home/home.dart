@@ -1,8 +1,12 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 
+// Project imports:
 import '/constants/constants.dart';
 import '/functions/functions.dart';
 import '/model/model.dart';
@@ -188,7 +192,93 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           _dailyHandler = _getDaily();
           setState(() {});
         },
-        child: ListView(
+        child:
+            // ResponsiveGridList(
+            //   physics: const NeverScrollableScrollPhysics(),
+            //   shrinkWrap: true,
+            //   desiredItemWidth:
+            //       MediaQuery.of(context).size.width > 600 ? 200 : 150,
+            //   minSpacing: 10,
+            //   children: [
+            //     for (var i in _dailyList)
+            //       Container(
+            //         margin: const EdgeInsets.only(bottom: 10),
+            //         decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(7),
+            //           color: AppColors.pureWhiteColor,
+            //         ),
+            //         padding: const EdgeInsets.all(10),
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             Row(
+            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //               children: [
+            //                 Column(
+            //                   children: [
+            //                     Text(
+            //                       i.date,
+            //                       style: Theme.of(context).textTheme.titleLarge,
+            //                     ),
+            //                     const SizedBox(height: 5),
+            //                     const Text("Expenses List"),
+            //                   ],
+            //                 ),
+            //                 Column(
+            //                   children: [
+            //                     Text(
+            //                       "Balance",
+            //                       style: Theme.of(context).textTheme.titleLarge,
+            //                     ),
+            //                     const SizedBox(height: 5),
+            //                     Text(
+            //                       "$_currency ${i.balance}",
+            //                       style: Theme.of(context)
+            //                           .textTheme
+            //                           .titleMedium!
+            //                           .copyWith(
+            //                             fontWeight: FontWeight.bold,
+            //                             color: AppColors.primaryColor,
+            //                           ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ],
+            //             ),
+            //             const Divider(),
+            //             Table(
+            //               children: [
+            //                 eTableHead(context, "Account", "Credit", "Debit"),
+            //                 ...i.expense.map((j) {
+            //                   return eTableBody(
+            //                     context,
+            //                     j.accountIdentification,
+            //                     j.type == 1
+            //                         ? "$_currency ${j.entry.toString()}"
+            //                         : '',
+            //                     j.type == 2
+            //                         ? "$_currency ${j.entry.toString()}"
+            //                         : '',
+            //                     j,
+            //                     () {
+            //                       _dailyHandler = _getDaily();
+            //                       _weeklyHandler = _getWeekly();
+            //                       _monthlyHandler = _getMonthly();
+            //                       _yearlyHandler = _getYearly();
+            //                       setState(() {});
+            //                     },
+            //                   );
+            //                 }),
+            //                 eTableFooter(context, "$_currency ${i.totalCredit}",
+            //                     "$_currency ${i.totalDebit}")
+            //               ],
+            //             )
+            //           ],
+            //         ),
+            //       )
+            //   ],
+            // )
+            ListView(
           padding: const EdgeInsets.all(10),
           children: [
             for (var i in _dailyList)

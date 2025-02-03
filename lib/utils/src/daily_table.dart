@@ -1,9 +1,11 @@
-import 'package:daytoday_ledgerbook/model/model.dart';
-import 'package:daytoday_ledgerbook/utils/src/sheet.dart';
-import 'package:daytoday_ledgerbook/view/src/entry/entry.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
+import '/model/model.dart';
 import '/services/services.dart';
+import '/utils/src/sheet.dart';
+import '/view/view.dart';
 
 TableRow eTableHead(
     BuildContext context, String account, String leftData, String rightData) {

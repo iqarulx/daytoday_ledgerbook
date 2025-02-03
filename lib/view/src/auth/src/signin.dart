@@ -4,12 +4,16 @@
   found in the LICENSE file.
 */
 
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 
+// Project imports:
 import '/functions/functions.dart';
 import '/services/services.dart';
 import '/ui/ui.dart';

@@ -1,5 +1,8 @@
-import '/services/services.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import '/services/services.dart';
 
 class ThemeOption extends StatefulWidget {
   const ThemeOption({super.key});

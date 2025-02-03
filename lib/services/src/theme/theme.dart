@@ -1,7 +1,9 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../color/app_colors.dart';
+// Project imports:
+import '/services/services.dart';
 
 class AppTheme {
   static ThemeData appTheme = ThemeData(

@@ -1,14 +1,18 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:uuid/uuid.dart';
 
+// Project imports:
+import '/constants/constants.dart';
 import '/functions/functions.dart';
+import '/model/model.dart';
 import '/services/services.dart';
 import '/ui/ui.dart';
 import '/utils/utils.dart';
-import '/constants/constants.dart';
-import '/model/model.dart';
 
 class EditProfile extends StatefulWidget {
   final Map<String, dynamic> data;
@@ -313,6 +317,7 @@ class _EditProfileState extends State<EditProfile> {
                         FormFields(
                           controller: TextEditingController(),
                           fillColor: _colors[i],
+                          readOnly: true,
                           label: "Account Color",
                           onTap: () {
                             showDialog(

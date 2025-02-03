@@ -1,10 +1,15 @@
+// Flutter imports:
+import 'package:daytoday_ledgerbook/ui/src/trademark.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:iconsax/iconsax.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../constants/constants.dart';
+// Project imports:
+import '/constants/constants.dart';
 import '/services/services.dart';
 import '/utils/utils.dart';
 import '/view/view.dart';
@@ -29,6 +34,7 @@ class _SidebarState extends State<Sidebar> {
           child: Column(
             children: [
               listOptions(),
+              const Trademark(),
               policyOption(),
               logoutButton(),
             ],
@@ -40,7 +46,7 @@ class _SidebarState extends State<Sidebar> {
 
   Padding policyOption() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

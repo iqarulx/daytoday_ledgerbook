@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:172051736995:android:0efd91000ae91c969c1216",
+        "android_client_info": {
+          "package_name": "com.example.food_delivery_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdrZXy1Fi4zxxUgo_sYqj2b8gAEFski2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:172051736995:android:eced9b4f0ef083b79c1216",
         "android_client_info": {
           "package_name": "com.srisoftwarez.app_tester"
@@ -29,6 +48,25 @@
         "mobilesdk_app_id": "1:172051736995:android:20df20b806b28b799c1216",
         "android_client_info": {
           "package_name": "com.srisoftwarez.daytoday_ledgerbook"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdrZXy1Fi4zxxUgo_sYqj2b8gAEFski2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172051736995:android:6e1f6ba51e9ae4089c1216",
+        "android_client_info": {
+          "package_name": "com.srisoftwarez.shareshpere"
         }
       },
       "oauth_client": [],

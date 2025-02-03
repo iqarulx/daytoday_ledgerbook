@@ -1,5 +1,7 @@
+// Dart imports:
 import 'dart:io';
 
+// Package imports:
 import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 import 'package:image_picker/image_picker.dart';
 

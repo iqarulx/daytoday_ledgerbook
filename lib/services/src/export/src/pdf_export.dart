@@ -1,7 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
+// Dart imports:
 import 'dart:typed_data';
+
+// Package imports:
 import 'package:pdf/pdf.dart' as pf;
 import 'package:pdf/widgets.dart' as pw;
+
+// Project imports:
 import '/constants/constants.dart';
 import '/model/model.dart';
 

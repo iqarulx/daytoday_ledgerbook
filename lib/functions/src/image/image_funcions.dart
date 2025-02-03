@@ -1,8 +1,13 @@
+// Dart imports:
 import 'dart:io';
+
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
-import '/ui/ui.dart';
-import '/services/services.dart';
+
+// Project imports:
 import '/constants/constants.dart';
+import '/services/services.dart';
+import '/ui/ui.dart';
 
 class ImageFuncions {
   static Future<String> uploadImage(context, {required File file}) async {
