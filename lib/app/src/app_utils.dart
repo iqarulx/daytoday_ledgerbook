@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
+import '/utils/utils.dart';
 import '/services/services.dart';
 import '/view/view.dart';
 
@@ -13,18 +14,18 @@ class AuthProvider with ChangeNotifier {
   Widget? get homeWidget => _homeWidget;
 
   Future<void> checkLoginStatus() async {
+    checkForUpdate();
     var isLogin = await Db.checkLogin();
-    // var vs = await Versions.checkVersion(); // Version Status
-
-    // if (vs["status"]) {
-    if (isLogin) {
-      _homeWidget = const Home();
+    var vs = await Versions.checkVersion(); // Version Status
+    if (vs["status"]) {
+      if (isLogin) {
+        _homeWidget = const Home();
+      } else {
+        _homeWidget = const Signin();
+      }
     } else {
-      _homeWidget = const Signin();
+      _homeWidget = Update(uD: vs["vd"]);
     }
-    // } else {
-    //   _homeWidget = Update(uD: vs["vd"]);
-    // }
 
     _isLoggedIn = true;
     notifyListeners();

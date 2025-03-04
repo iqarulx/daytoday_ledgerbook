@@ -9,3 +9,4 @@ export 'src/date_picker.dart';
 export 'src/data_table.dart';
 export 'src/file_utils.dart';
 export 'src/open_file.dart';
+export 'src/check_update.dart';

@@ -10,4 +10,6 @@ class Config {
       FirebaseFirestore.instance.collection('expenses');
   final CollectionReference<Map<String, dynamic>> notes =
       FirebaseFirestore.instance.collection('notes');
+  final CollectionReference<Map<String, dynamic>> version =
+      FirebaseFirestore.instance.collection('version');
 }
